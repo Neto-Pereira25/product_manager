@@ -1,0 +1,5 @@
+{
+    "execMap": {
+        "ts": "npx ts-node-dev --files --transpile-only -r sucrase/register"
+    }
+}
