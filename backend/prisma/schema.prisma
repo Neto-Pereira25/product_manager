@@ -1,0 +1,67 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum CouponType {
+  fixed
+  percent
+}
+
+enum DiscountType {
+  percent
+  coupon
+}
+
+model Product {
+  id          Int       @id @default(autoincrement())
+  name        String    @unique
+  description String?   @db.Text
+  price       Decimal   @db.Decimal(10, 2)
+  stock       Int
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime? @updatedAt
+  deletedAt   DateTime?
+
+  discounts ProductDiscount[]
+}
+
+model Coupon {
+  id         Int        @id @default(autoincrement())
+  code       String     @unique
+  type       CouponType
+  value      Decimal    @db.Decimal(10, 2)
+  oneShot    Boolean
+  maxUses    Int?
+  usesCount  Int        @default(0)
+  validFrom  DateTime
+  validUntil DateTime
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime?
+  deletedAt  DateTime?
+
+  discounts ProductDiscount[]
+}
+
+model ProductDiscount {
+  id        Int          @id @default(autoincrement())
+  productId Int          @unique
+  type      DiscountType
+  value     Int? // Apenas se type == percent
+  couponId  Int? // Apenas se type == coupon
+  appliedAt DateTime     @default(now())
+  removedAt DateTime?
+
+  product Product @relation(fields: [productId], references: [id])
+  coupon  Coupon? @relation(fields: [couponId], references: [id])
+}
