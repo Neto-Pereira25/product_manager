@@ -9,7 +9,7 @@ export class ProductRepository {
         return prisma.product.findUnique({ where: { id } });
     }
 
-    async findByNormalizedName(name: string) {
+    async findByNormalizedName(name: string): Promise<ProductType | null> {
         const normalized = normalizeString(name);
         return prisma.product.findFirst({
             where: {
@@ -21,7 +21,7 @@ export class ProductRepository {
         });
     }
 
-    async create(data: any): Promise<ProductType> {
+    async create(data: Prisma.ProductCreateInput): Promise<ProductType> {
         return prisma.product.create({ data });
     }
 

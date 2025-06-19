@@ -30,12 +30,6 @@ export class ProductController {
     async getById(req: Request, res: Response) {
         try {
             const product = await service.getProduct(Number(req.params.id));
-            if (!product) {
-                standardHttpResponse(res, StatusCodes.NOT_FOUND, {
-                    message: standardHttpMessage.NOT_FOUND.message
-                });
-                return;
-            }
             standardHttpResponse(res, StatusCodes.OK, product);
             return;
         } catch (e: any) {
@@ -45,6 +39,13 @@ export class ProductController {
     }
 
     async update(req: Request, res: Response) {
+        const validation = CreateProductSchema.safeParse(req.body);
+
+        if (!validation.success) {
+            standardHttpResponse(res, StatusCodes.BAD_REQUEST, validation.error.errors.map(err => err.message));
+            return;
+        }
+
         try {
             const updated = await service.updateProduct(Number(req.params.id), req.body);
             standardHttpResponse(res, StatusCodes.OK, updated);

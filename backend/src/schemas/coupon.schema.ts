@@ -36,10 +36,27 @@ export const CreateCouponSchema = z.object({
         .int('O uso máximo não pode ser um número decimal')
         .positive('O uso máximo precisar ser um número positivo')
         .optional(),
-    validFrom: z
-        .coerce.date(),
-    validUntil: z
-        .coerce.date(),
+    validFrom:
+        z.string({
+            required_error: 'A data em que o cupom se torna válido é requerida',
+        })
+            .refine((val) => /^\d{4}-\d{2}-\d{2}$/.test(val), {
+                message: 'A data em que o cupom se torna válido precisa estar no formato ISO 8601 (YYYY-MM-DD)',
+            })
+            .refine((val) => !isNaN(Date.parse(val)), {
+                message: 'A data em que o cupom se torna válido está inválida',
+            })
+            .transform((val) => new Date(val)),
+    validUntil: z.string({
+        required_error: 'A data de validade do cupom é requerida',
+    })
+        .refine((val) => /^\d{4}-\d{2}-\d{2}$/.test(val), {
+            message: 'A data de validade precisa estar no formato ISO 8601 (YYYY-MM-DD)',
+        })
+        .refine((val) => !isNaN(Date.parse(val)), {
+            message: 'A data de validade é inválida',
+        })
+        .transform((val) => new Date(val))
 })
     .superRefine((data, ctx) => {
         if (data.type === 'percent') {

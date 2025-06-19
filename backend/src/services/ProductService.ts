@@ -32,10 +32,10 @@ export class ProductService {
         return createdProdut;
     }
 
-    async getProduct(id: number): Promise<ProductType | null> {
+    async getProduct(id: number): Promise<ProductType> {
         const product = await this.productRepository.findById(id);
         if (!product) {
-            return null;
+            throw standardHttpMessage.NOT_FOUND;
         }
 
         return product;
