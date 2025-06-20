@@ -74,11 +74,6 @@ export class CouponService {
         }
 
         if (data.code && normalizeString(data.code) !== coupon.code) {
-            console.log(data.code);
-            console.log(normalizeString(data.code));
-            console.log(coupon.code);
-            console.log();
-            console.log(normalizeString(data.code) !== coupon.code);
             throw standardHttpMessage.BAD_REQUEST;
         }
 
@@ -95,7 +90,7 @@ export class CouponService {
             throw standardHttpMessage.NOT_FOUND;
         }
 
-        const validCoupon = await this.couponRepository.restore(id);
+        await this.couponRepository.restore(id);
 
         return this.updateCoupon(id, data);
     }
