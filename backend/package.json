@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "nodemon server.ts",
     "test": "jest",
+    "test:unit": "jest tests/unit",
+    "test:integration": "jest tests/integration",
     "test:watch": "jest --watch"
   },
   "keywords": [],
