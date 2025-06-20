@@ -27,4 +27,22 @@ describe('CouponService - Unit Test', () => {
 
         expect(result.code).toBe('promo10');
     });
+
+    it('does not allow duplicate code', async () => {
+        mockRepo.findByCode.mockReturnValue({ id: 1 });
+
+        await expect(
+            service.createCoupon({
+                code: 'PROMO10',
+                type: 'percent',
+                value: 10,
+                oneShot: false,
+                validFrom: new Date(),
+                validUntil: new Date(Date.now() + 1000 * 60 * 60),
+            })
+        ).rejects.toEqual({
+            status: 409,
+            message: 'Recurso já existe na base de dados'
+        });
+    });
 });
