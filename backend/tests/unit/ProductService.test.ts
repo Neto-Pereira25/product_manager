@@ -43,4 +43,13 @@ describe('ProductService - Unit Test', () => {
             message: 'Recurso já existe na base de dados'
         });
     });
+
+    it('must update product if exists', async () => {
+        mockRepo.findById.mockReturnValue({ id: 1, name: 'produto' });
+        mockRepo.findByNormalizedName.mockReturnValue(null);
+        mockRepo.update.mockReturnValue({ id: 1, stock: 99 });
+
+        const result = await service.updateProduct(1, { stock: 99 });
+        expect(result.stock).toBe(99);
+    });
 });
