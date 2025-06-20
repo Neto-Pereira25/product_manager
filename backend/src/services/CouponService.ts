@@ -6,8 +6,6 @@ import { normalizeString } from '../utils/normalize';
 import { standardHttpMessage } from '../utils/standardHttpMessage';
 
 export class CouponService {
-
-
     constructor(
         private couponRepository: CouponRepository = new CouponRepository()
     ) { }
@@ -19,7 +17,7 @@ export class CouponService {
 
         if (existing) {
             if (existing.deletedAt !== null) {
-                const coupon = await this.restoreProduct(existing.id, {
+                const coupon = await this.restoreCoupon(existing.id, {
                     ...data,
                     code: normalizedCode
                 });
@@ -83,7 +81,7 @@ export class CouponService {
         });
     }
 
-    async restoreProduct(id: number, data: Partial<CreateCouponDTO>): Promise<CouponType> {
+    async restoreCoupon(id: number, data: Partial<CreateCouponDTO>): Promise<CouponType> {
         const coupon = await this.couponRepository.findById(id);
 
         if (!coupon || coupon.deletedAt === null) {
