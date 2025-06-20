@@ -83,6 +83,7 @@ export class CouponService {
         const coupon = await this.couponRepository.findById(id);
 
         if (!coupon || coupon.deletedAt) {
+            console.log('Tá caindo aqui');
             throw standardHttpMessage.NOT_FOUND;
         }
 
