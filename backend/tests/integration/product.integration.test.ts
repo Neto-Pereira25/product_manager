@@ -33,4 +33,21 @@ describe('ProductService - Integration Test', () => {
         expect(product).toHaveProperty('id');
         expect(product.name).toBe('produto teste');
     });
+
+    it('must fail to create duplicate product', async () => {
+        try {
+            const product = await service.createProduct({
+                name: 'Produto Teste',
+                description: 'Repetido',
+                stock: 10,
+                price: 100.0
+            });
+
+            expect(product).toHaveProperty('id');
+            expect(product.name).toBe('produto teste');
+        } catch (e: any) {
+            expect(e.status).toBe(409)
+        }
+    });
+
 });
