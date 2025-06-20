@@ -27,4 +27,20 @@ describe('ProductService - Unit Test', () => {
         expect(mockRepo.create).toHaveBeenCalled();
         expect(result.id).toBe(1);
     });
+
+    it('must reject creation with duplicate name', async () => {
+        mockRepo.findByNormalizedName.mockReturnValue({ id: 99 });
+
+        await expect(
+            service.createProduct({
+                name: 'Produto Teste',
+                description: 'Repetido',
+                stock: 10,
+                price: 100.0
+            })
+        ).rejects.toEqual({
+            status: 409,
+            message: 'Recurso já existe na base de dados'
+        });
+    });
 });
