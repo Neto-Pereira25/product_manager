@@ -34,6 +34,13 @@ describe('ProductService - Integration Test', () => {
         expect(product.name).toBe('produto teste');
     });
 
+    it('must list products', async () => {
+        const products = await service.listProducts();
+
+        expect(Array.isArray(products)).toBe(true);
+        expect(products.length).toBeGreaterThanOrEqual(0);
+    });
+
     it('must fail to create duplicate product', async () => {
         try {
             const product = await service.createProduct({
