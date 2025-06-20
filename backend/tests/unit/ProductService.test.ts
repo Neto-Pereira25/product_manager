@@ -13,6 +13,10 @@ describe('ProductService - Unit Test', () => {
 
     const service = new ProductService(mockRepo as any);
 
+    beforeEach(() => {
+        jest.clearAllMocks();
+    });
+
     it('must create product if name is unique', async () => {
         mockRepo.findByNormalizedName.mockReturnValue(null);
         mockRepo.create.mockReturnValue({ id: 1, name: 'produto teste' });
@@ -52,6 +56,18 @@ describe('ProductService - Unit Test', () => {
         const result = await service.updateProduct(1, { stock: 99 });
         expect(result.stock).toBe(99);
     });
+
+    it('deve lançar erro ao tentar atualizar produto inexistente', async () => {
+        mockRepo.findById.mockResolvedValue(null);
+
+        await expect(service.updateProduct(123, { stock: 50 })).rejects.toEqual({
+            status: 404,
+            message: 'Recurso não encontrado',
+        });
+
+        expect(mockRepo.update).not.toHaveBeenCalled();
+    });
+
 
     it('should throw error when trying to delete non-existent product', async () => {
         mockRepo.findById.mockReturnValue(null);
