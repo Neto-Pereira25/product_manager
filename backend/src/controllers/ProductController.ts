@@ -10,6 +10,13 @@ const service = new ProductService();
 
 export class ProductController {
     async create(req: Request, res: Response) {
+        if (!req.body) {
+            standardHttpResponse(res, StatusCodes.INTERNAL_SERVER_ERROR, {
+                error: 'Dados do produto inválidos ou ausentes'
+            });
+            return;
+        }
+
         const validation = CreateProductSchema.safeParse(req.body);
 
         if (!validation.success) {
@@ -39,6 +46,13 @@ export class ProductController {
     }
 
     async update(req: Request, res: Response) {
+        if (!req.body) {
+            standardHttpResponse(res, StatusCodes.INTERNAL_SERVER_ERROR, {
+                error: 'Dados do produto inválidos ou ausentes'
+            });
+            return;
+        }
+
         const validation = CreateProductSchema.safeParse(req.body);
 
         if (!validation.success) {

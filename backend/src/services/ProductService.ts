@@ -47,6 +47,13 @@ export class ProductService {
     }
 
     async getProduct(id: number): Promise<ProductType> {
+        if (!id) {
+            throw {
+                status: StatusCodes.BAD_REQUEST,
+                message: 'Id inválido para encontrar produto, o id deve ser um número inteiro positivo'
+            };
+        }
+
         const product = await this.productRepository.findById(id);
         if (!product) {
             throw standardHttpMessage.NOT_FOUND;
@@ -56,6 +63,13 @@ export class ProductService {
     }
 
     async updateProduct(id: number, data: Partial<CreateProductDTO>): Promise<ProductType> {
+        if (!id) {
+            throw {
+                status: StatusCodes.BAD_REQUEST,
+                message: 'Id inválido ao atualizar produto, o id deve ser um número inteiro positivo'
+            };
+        }
+
         const existing = await this.productRepository.findById(id);
         if (!existing) {
             throw standardHttpMessage.NOT_FOUND;
@@ -83,6 +97,13 @@ export class ProductService {
     }
 
     async softDeleteProduct(id: number): Promise<void> {
+        if (!id) {
+            throw {
+                status: StatusCodes.BAD_REQUEST,
+                message: 'Id inválido para remover produto, o id deve ser um número inteiro positivo'
+            };
+        }
+
         const product = await this.productRepository.findById(id);
 
         if (!product) {
@@ -93,6 +114,13 @@ export class ProductService {
     }
 
     async restoreProduct(id: number): Promise<ProductType> {
+        if (!id) {
+            throw {
+                status: StatusCodes.BAD_REQUEST,
+                message: 'Id inválido para restaurar produto, o id deve ser um número inteiro positivo'
+            };
+        }
+
         const product = await this.productRepository.findById(id);
 
         if (!product || product.deletedAt === null) {
