@@ -57,4 +57,18 @@ describe('CouponService - Integration Test', () => {
             expect(error.status).toBe(409);
         }
     });
+
+    it('must delete coupon successfully', async () => {
+        const coupon = await prisma.coupon.findFirst({
+            where: {
+                code: 'promo20'
+            }
+        });
+
+        if (coupon) {
+            await service.deleteCoupon(coupon.id);
+            const updated = await service.getCouponById(coupon.id).catch(e => e);
+            expect(updated.status).toBe(404);
+        }
+    });
 });
