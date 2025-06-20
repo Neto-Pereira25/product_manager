@@ -39,6 +39,13 @@ describe('CouponService - Integration Test', () => {
         expect(coupon.code).toBe('promo20');
     });
 
+    it('must list coupon', async () => {
+        const coupons = await service.listCoupons();
+
+        expect(Array.isArray(coupons)).toBe(true);
+        expect(coupons.length).toBeGreaterThanOrEqual(0);
+    });
+
     it('should not duplicate code to be created', async () => {
         try {
             const now = new Date();
