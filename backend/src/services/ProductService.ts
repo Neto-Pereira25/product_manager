@@ -8,7 +8,11 @@ import { ProductType } from '../types/ProductType';
 import { standardHttpMessage } from '../utils/standardHttpMessage';
 
 export class ProductService {
-    private productRepository = new ProductRepository();
+
+    constructor(
+        private productRepository: ProductRepository = new ProductRepository()
+    ) { }
+    // private productRepository = new ProductRepository();
 
     async createProduct(data: CreateProductDTO): Promise<ProductType> {
         const normalizedName = normalizeString(data.name);
