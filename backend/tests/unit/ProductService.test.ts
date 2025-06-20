@@ -57,7 +57,7 @@ describe('ProductService - Unit Test', () => {
         expect(result.stock).toBe(99);
     });
 
-    it('deve lançar erro ao tentar atualizar produto inexistente', async () => {
+    it('should throw error when trying to update non-existent product', async () => {
         mockRepo.findById.mockResolvedValue(null);
 
         await expect(service.updateProduct(123, { stock: 50 })).rejects.toEqual({
@@ -77,4 +77,14 @@ describe('ProductService - Unit Test', () => {
             message: 'Recurso não encontrado',
         });
     });
+
+    it('must delete existing product', async () => {
+        mockRepo.findById.mockResolvedValue({ id: 1, name: 'produto' });
+        mockRepo.softDelete.mockResolvedValue(undefined); // pode até omitir
+
+        await service.softDeleteProduct(1);
+
+        expect(mockRepo.softDelete).toHaveBeenCalledWith(1);
+    });
+
 });
