@@ -42,4 +42,13 @@ describe('ProductDiscountService - Unit Test', () => {
         const result = await service.applyPercentDiscount(1, 20);
         expect(result.id).toBe(1);
     });
+
+    it('must reject if product already has discount', async () => {
+        mockPrisma.productDiscount.findFirst.mockResolvedValue({ id: 1, removedAt: null });
+
+        await expect(service.applyPercentDiscount(1, 10)).rejects.toEqual({
+            status: 409,
+            message: 'O produto já possui um desconto ativo',
+        });
+    });
 });
