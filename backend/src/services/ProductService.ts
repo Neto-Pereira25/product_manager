@@ -19,6 +19,17 @@ export class ProductService {
         const existing = await this.productRepository.findByNormalizedName(normalizedName);
 
         if (existing) {
+            if (existing.deletedAt !== null) {
+                const product = await this.restoreProduct(existing.id);
+
+                throw {
+                    status: StatusCodes.OK,
+                    message: {
+                        obs: 'Produto restaurado com sucesso',
+                        product,
+                    },
+                };
+            }
             throw standardHttpMessage.CONFLICT;
         }
 
