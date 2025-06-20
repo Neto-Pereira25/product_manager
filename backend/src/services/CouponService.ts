@@ -1,3 +1,4 @@
+import { StatusCodes } from 'http-status-codes';
 import { CouponRepository } from '../repositories/CouponRepository';
 import { CreateCouponDTO } from '../schemas/coupon.schema';
 import { CouponType } from '../types/CouponType';
@@ -17,6 +18,19 @@ export class CouponService {
         const existing = await this.couponRepository.findByCode(normalizedCode);
 
         if (existing) {
+            if (existing.deletedAt !== null) {
+                const coupon = await this.restoreProduct(existing.id, {
+                    ...data,
+                    code: normalizedCode
+                });
+                throw {
+                    status: StatusCodes.OK,
+                    message: {
+                        obs: 'Cupom restaurado com sucesso.',
+                        coupon,
+                    }
+                };
+            }
             throw standardHttpMessage.CONFLICT;
         }
 
@@ -60,6 +74,11 @@ export class CouponService {
         }
 
         if (data.code && normalizeString(data.code) !== coupon.code) {
+            console.log(data.code);
+            console.log(normalizeString(data.code));
+            console.log(coupon.code);
+            console.log();
+            console.log(normalizeString(data.code) !== coupon.code);
             throw standardHttpMessage.BAD_REQUEST;
         }
 
@@ -67,5 +86,17 @@ export class CouponService {
             ...data,
             updatedAt: new Date(),
         });
+    }
+
+    async restoreProduct(id: number, data: Partial<CreateCouponDTO>): Promise<CouponType> {
+        const coupon = await this.couponRepository.findById(id);
+
+        if (!coupon || coupon.deletedAt === null) {
+            throw standardHttpMessage.NOT_FOUND;
+        }
+
+        const validCoupon = await this.couponRepository.restore(id);
+
+        return this.updateCoupon(id, data);
     }
 }
