@@ -12,7 +12,6 @@ export class ProductService {
     constructor(
         private productRepository: ProductRepository = new ProductRepository()
     ) { }
-    // private productRepository = new ProductRepository();
 
     async createProduct(data: CreateProductDTO): Promise<ProductType> {
         const normalizedName = normalizeString(data.name);

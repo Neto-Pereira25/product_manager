@@ -86,5 +86,4 @@ describe('ProductService - Unit Test', () => {
 
         expect(mockRepo.softDelete).toHaveBeenCalledWith(1);
     });
-
 });

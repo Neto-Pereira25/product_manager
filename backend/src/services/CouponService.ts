@@ -5,7 +5,11 @@ import { normalizeString } from '../utils/normalize';
 import { standardHttpMessage } from '../utils/standardHttpMessage';
 
 export class CouponService {
-    private couponRepository = new CouponRepository();
+
+
+    constructor(
+        private couponRepository: CouponRepository = new CouponRepository()
+    ) { }
 
     async createCoupon(data: CreateCouponDTO): Promise<CouponType> {
         const normalizedCode = normalizeString(data.code);
