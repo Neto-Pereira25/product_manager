@@ -58,4 +58,11 @@ describe('CouponService - Unit Test', () => {
             message: 'A requisição está mal formada ou inválida'
         });
     });
+
+    it('delete existing coupon', async () => {
+        mockRepo.findById.mockReturnValue({ id: 1 });
+        mockRepo.softDelete.mockReturnValue({ deletedAt: new Date() });
+
+        await expect(service.deleteCoupon(1)).resolves.toBeUndefined();
+    });
 });
