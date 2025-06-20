@@ -51,4 +51,12 @@ describe('ProductDiscountService - Unit Test', () => {
             message: 'O produto já possui um desconto ativo',
         });
     });
+
+    it('should successfully remove discount', async () => {
+        mockPrisma.productDiscount.findFirst.mockResolvedValue({ id: 1, removedAt: null });
+        mockPrisma.productDiscount.update.mockResolvedValue({ removedAt: new Date() });
+
+        const result = await service.removeDiscount(1);
+        expect(result.removedAt).not.toBeNull();
+    });
 });
