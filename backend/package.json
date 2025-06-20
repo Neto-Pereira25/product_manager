@@ -19,6 +19,8 @@
     "express": "^5.1.0",
     "http-status-codes": "^2.3.0",
     "prisma": "^6.10.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
     "zod": "^3.25.67"
   },
   "devDependencies": {
@@ -26,6 +28,8 @@
     "@types/express": "^5.0.3",
     "@types/jest": "^30.0.0",
     "@types/node": "^24.0.3",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.8",
     "jest": "^30.0.2",
     "nodemon": "^3.1.10",
     "sucrase": "^3.35.0",
