@@ -3,7 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 
 import { ProductDiscountService } from '../services/ProductDiscountService';
 import { standardHttpResponse, standardHttpResponseError } from '../utils/standardHttpResponse';
-import { ApplyCouponDiscountSchema, ApplyPercentDiscountSchema } from '../schemas/product.discount.schema';
+import { ApplyCouponDiscountSchema, ApplyPercentDiscountSchema, ProductIdDiscountSchema } from '../schemas/product.discount.schema';
 
 const service = new ProductDiscountService();
 
@@ -68,10 +68,43 @@ export class ProductDiscountController {
         const productId = Number(req.params.id);
 
         try {
+            const validation = ProductIdDiscountSchema.safeParse({ productId });
+
+            if (!validation.success) {
+                standardHttpResponse(res, StatusCodes.BAD_REQUEST, validation.error.errors.map(err => err.message));
+                return;
+            }
+
             await service.removeDiscount(productId);
             standardHttpResponse(res, StatusCodes.NO_CONTENT, {
                 message: 'Disconto removido com sucesso'
             });
+        } catch (e) {
+            standardHttpResponseError(res, e);
+        }
+    }
+
+    async getDiscount(req: Request, res: Response) {
+        if (!req.body) {
+            standardHttpResponse(res, StatusCodes.INTERNAL_SERVER_ERROR, {
+                error: 'Código do cupom inválido ou ausente'
+            });
+            return;
+        }
+
+        const { productId } = req.body;
+
+        try {
+            const validation = ProductIdDiscountSchema.safeParse({ productId });
+
+            if (!validation.success) {
+                standardHttpResponse(res, StatusCodes.BAD_REQUEST, validation.error.errors.map(err => err.message));
+                return;
+            }
+
+            const discount = await service.findDiscount(validation.data.productId);
+
+            standardHttpResponse(res, StatusCodes.OK, discount);
         } catch (e) {
             standardHttpResponseError(res, e);
         }

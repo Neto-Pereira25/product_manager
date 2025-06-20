@@ -4,6 +4,7 @@ import { ProductDiscountController } from '../controllers/ProductDiscountControl
 const discountRouter = Router();
 const controller = new ProductDiscountController();
 
+discountRouter.get('/products/find/discount/', controller.getDiscount);
 discountRouter.post('/products/:id/discount/percent', controller.applyPercent);
 discountRouter.post('/products/:id/discount/coupon', controller.applyCoupon);
 discountRouter.delete('/products/:id/discount', controller.remove);

@@ -50,8 +50,14 @@ export const ApplyCouponDiscountSchema = z.object({
 export type ApplyCouponDiscountDTO = z.infer<typeof ApplyCouponDiscountSchema>;
 
 
-export const RemoveDiscountSchema = z.object({
-    productId: z.number().int().positive({ message: 'ID do produto deve ser um número positivo' }),
+export const ProductIdDiscountSchema = z.object({
+    productId: z
+        .number({
+            required_error: 'O id do produto é requerido',
+            invalid_type_error: 'O id do produto precisa ser um número'
+        })
+        .int('O id do produto precisa ser um número inteiro')
+        .positive({ message: 'O id do produto deve ser um número positivo' }),
 });
 
-export type RemoveDiscountDTO = z.infer<typeof RemoveDiscountSchema>;
+export type RemoveDiscountDTO = z.infer<typeof ProductIdDiscountSchema>;

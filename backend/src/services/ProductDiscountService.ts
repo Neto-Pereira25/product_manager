@@ -107,4 +107,17 @@ export class ProductDiscountService {
 
         return await this.productDiscountRepository.updateToRemoved(active.id);
     }
+
+    async findDiscount(productId: number) {
+        const discount = await this.productDiscountRepository.findActiveByProductId(productId);
+
+        if (!discount) {
+            throw {
+                status: StatusCodes.NOT_FOUND,
+                message: 'Nenhum desconto ativo encontrado para este produto ou cupon',
+            };
+        }
+
+        return discount;
+    }
 }
