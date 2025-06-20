@@ -85,4 +85,12 @@ describe('ProductDiscountService', () => {
         expect(result).toHaveProperty('id');
         expect(result.type).toBe('percent');
     });
+
+    it('must not apply a second discount to a product that has already been discountd', async () => {
+        try {
+            await discountService.applyPercentDiscount(productId, 10);
+        } catch (e: any) {
+            expect(e.status).toBe(409);
+        }
+    });
 });
