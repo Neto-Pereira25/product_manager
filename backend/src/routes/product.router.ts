@@ -178,7 +178,7 @@ productRouter.delete('/:id', controller.softDelete);
 /**
  * @swagger
  * /products/{id}/restore:
- *   patch:
+ *   post:
  *     summary: Restaura um produto deletado
  *     tags: [Products]
  *     parameters:
