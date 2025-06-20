@@ -38,4 +38,23 @@ describe('CouponService - Integration Test', () => {
 
         expect(coupon.code).toBe('promo20');
     });
+
+    it('should not duplicate code to be created', async () => {
+        try {
+            const now = new Date();
+            const later = new Date();
+            later.setDate(now.getDate() + 7);
+
+            await service.createCoupon({
+                code: 'PROMO20',
+                type: 'fixed',
+                value: 20,
+                oneShot: false,
+                validFrom: now,
+                validUntil: later,
+            });
+        } catch (error: any) {
+            expect(error.status).toBe(409);
+        }
+    });
 });
