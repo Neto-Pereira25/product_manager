@@ -62,4 +62,15 @@ describe('ProductService - Integration Test', () => {
         expect(updated.stock).toBe(20);
         expect(updated.description).toEqual('Atualizado');
     });
+
+    it('must delete and restore the product', async () => {
+        const product = (await service.listProducts())[0];
+
+        await service.softDeleteProduct(product.id);
+        const deleted = await service.getProduct(product.id);
+        expect(deleted.deletedAt).not.toBeNull();
+
+        const restored = await service.restoreProduct(product.id);
+        expect(restored.deletedAt).toBeNull();
+    });
 });
