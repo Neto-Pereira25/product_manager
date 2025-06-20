@@ -154,5 +154,6 @@ http://localhost:3000/api-docs
 ## 👨‍💻 Autor
 
 Desenvolvido por José Pereira da Silva Neto
+
 - 📧 devneto203@gmail.com
 - 🔗 [LinkedIn](https://www.linkedin.com/in/jose-neto-programador/)
