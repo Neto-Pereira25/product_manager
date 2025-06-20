@@ -8,7 +8,7 @@ API RESTful desenvolvida em Node.js com TypeScript, focada no gerenciamento de p
 
 - **Node.js** + **Express**
 - **TypeScript**
-- **Prisma ORM** (com SQLite em memória para testes)
+- **Prisma ORM** (com Postgres)
 - **Zod** (validações)
 - **Swagger** (documentação da API)
 - **Jest + Supertest** (testes unitários e integração)
@@ -42,7 +42,7 @@ tests
 
 - Node.js LTS
 - NPM ou Yarn
-- SQLite (opcional — Prisma cuida disso)
+- Postgres
 - Docker (opcional)
 
 ### ▶️ Passo a passo
@@ -139,7 +139,7 @@ http://localhost:3000/api-docs
 
 ## 🛠 Melhorias futuras
 
-- Docker com banco SQLite persistente
+- Docker com banco Postgres
 
 - Versionamento de API (ex: /api/v2)
 
