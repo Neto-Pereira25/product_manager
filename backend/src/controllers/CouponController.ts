@@ -10,6 +10,14 @@ const service = new CouponService();
 
 export class CouponController {
     async create(req: Request, res: Response) {
+
+        if (!req.body) {
+            standardHttpResponse(res, StatusCodes.INTERNAL_SERVER_ERROR, {
+                error: 'Dados do cupom inválidos ou ausentes'
+            });
+            return;
+        }
+
         const parsed = CreateCouponSchema.safeParse(req.body);
 
         if (!parsed.success) {
@@ -47,6 +55,13 @@ export class CouponController {
     }
 
     async update(req: Request, res: Response) {
+        if (!req.body) {
+            standardHttpResponse(res, StatusCodes.INTERNAL_SERVER_ERROR, {
+                error: 'Dados do cupom inválidos ou ausentes'
+            });
+            return;
+        }
+
         const validation = CreateCouponSchema.safeParse(req.body);
 
         if (!validation.success) {

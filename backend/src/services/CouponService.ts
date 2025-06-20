@@ -41,6 +41,13 @@ export class CouponService {
     }
 
     async getCouponById(id: number): Promise<CouponType> {
+        if (!id) {
+            throw {
+                status: StatusCodes.BAD_REQUEST,
+                message: 'Id inválido, o id deve ser um número inteiro positivo'
+            };
+        }
+
         const coupon = await this.couponRepository.findById(id);
 
         if (!coupon || coupon.deletedAt) {
@@ -55,6 +62,14 @@ export class CouponService {
     }
 
     async deleteCoupon(id: number): Promise<void> {
+
+        if (!id) {
+            throw {
+                status: StatusCodes.BAD_REQUEST,
+                message: 'Id inválido, o id deve ser um número inteiro positivo'
+            };
+        }
+
         const coupon = await this.couponRepository.findById(id);
 
         if (!coupon || coupon.deletedAt) {
