@@ -50,4 +50,16 @@ describe('ProductService - Integration Test', () => {
         }
     });
 
+    it('must update product successfully', async () => {
+        const products = await service.listProducts();
+        const product = products[0];
+
+        const updated = await service.updateProduct(product.id, {
+            description: 'Atualizado',
+            stock: 20,
+        });
+
+        expect(updated.stock).toBe(20);
+        expect(updated.description).toEqual('Atualizado');
+    });
 });
