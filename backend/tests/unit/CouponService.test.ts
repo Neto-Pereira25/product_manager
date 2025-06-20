@@ -29,7 +29,7 @@ describe('CouponService - Unit Test', () => {
     });
 
     it('does not allow duplicate code', async () => {
-        mockRepo.findByCode.mockReturnValue({ id: 1 });
+        mockRepo.findByCode.mockReturnValue({ id: 1, deletedAt: null });
 
         await expect(
             service.createCoupon({

@@ -18,11 +18,11 @@ describe('ProductService - Unit Test', () => {
     });
 
     it('must create product if name is unique', async () => {
-        mockRepo.findByNormalizedName.mockReturnValue(null);
-        mockRepo.create.mockReturnValue({ id: 1, name: 'produto teste' });
+        mockRepo.findByNormalizedName.mockResolvedValue(null);
+        mockRepo.create.mockResolvedValue({ id: 1, name: 'Produto do Birigui' });
 
         const result = await service.createProduct({
-            name: 'Produto Teste',
+            name: 'Produto do Birigui',
             description: 'Repetido',
             stock: 10,
             price: 100.0
@@ -33,19 +33,19 @@ describe('ProductService - Unit Test', () => {
     });
 
     it('must reject creation with duplicate name', async () => {
-        mockRepo.findByNormalizedName.mockReturnValue({ id: 99 });
+        mockRepo.findByNormalizedName.mockResolvedValue({ id: 99, deletedAt: null });
 
-        await expect(
-            service.createProduct({
-                name: 'Produto Teste',
+        try {
+            await service.createProduct({
+                name: 'Produto do Birigui',
                 description: 'Repetido',
                 stock: 10,
                 price: 100.0
-            })
-        ).rejects.toEqual({
-            status: 409,
-            message: 'Recurso já existe na base de dados'
-        });
+            });
+        } catch (e: any) {
+            expect(e.status).toBe(409);
+            expect(e.message).toEqual('Recurso já existe na base de dados');
+        }
     });
 
     it('must update product if exists', async () => {
