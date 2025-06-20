@@ -26,9 +26,9 @@ class App {
 
     private routes(): void {
         this.app.use('/api/v1/', homeRouter);
+        this.app.use('/api/v1/', discountRouter);
         this.app.use('/api/v1/products/', productRouter);
         this.app.use('/api/v1/coupons/', couponRouter);
-        this.app.use('/api/v1/', discountRouter);
     }
 }
 
