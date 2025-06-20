@@ -45,4 +45,17 @@ describe('CouponService - Unit Test', () => {
             message: 'Recurso já existe na base de dados'
         });
     });
+
+    it('throws error when updating code', async () => {
+        mockRepo.findById.mockReturnValue({ id: 1, code: 'promo10' });
+
+        await expect(
+            service.updateCoupon(1, {
+                code: 'outro-codigo-qualquer',
+            })
+        ).rejects.toEqual({
+            status: 400,
+            message: 'A requisição está mal formada ou inválida'
+        });
+    });
 });
