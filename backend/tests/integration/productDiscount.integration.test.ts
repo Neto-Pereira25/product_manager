@@ -60,24 +60,33 @@ describe('ProductDiscountService', () => {
     });
 
     afterAll(async () => {
-        const product = await productRepository.findByNormalizedName('Produto Desconto');
-        const coupon = await couponRepository.findByCode('DESCONTAO');
+        try {
+            const product = await productRepository.findByNormalizedName('Produto Desconto');
+            const coupon = await couponRepository.findByCode('DESCONTAO');
 
-        if (product) {
-            const productDiscount = await discountRepository.findActiveByProductId(product.id);
+            if (product) {
+                // Busca todos os descontos do produto (ativo ou não)
+                const discounts = await prisma.productDiscount.findMany({
+                    where: { productId: product.id },
+                });
 
-            if (productDiscount) {
-                await prisma.productDiscount.delete({ where: { id: productDiscount.id } });
+                // Deleta todos os descontos relacionados ao produto
+                for (const discount of discounts) {
+                    await prisma.productDiscount.delete({ where: { id: discount.id } });
+                }
+
+                // Agora pode deletar o produto
+                await prisma.product.delete({ where: { id: product.id } });
             }
 
-            await prisma.product.delete({ where: { id: product.id } });
+            if (coupon) {
+                await prisma.coupon.delete({ where: { id: coupon.id } });
+            }
+        } catch (error) {
+            console.error('❌ Erro no afterAll:', error);
+        } finally {
+            await prisma.$disconnect();
         }
-
-        if (coupon) {
-            await prisma.coupon.delete({ where: { id: coupon.id } });
-        }
-
-        prisma.$disconnect();
     });
 
     it('must apply direct percentage discount successfully', async () => {
@@ -92,5 +101,10 @@ describe('ProductDiscountService', () => {
         } catch (e: any) {
             expect(e.status).toBe(409);
         }
+    });
+
+    it('should  successfully remove discount', async () => {
+        const result = await discountService.removeDiscount(productId);
+        expect(result.removedAt).not.toBeNull();
     });
 });
