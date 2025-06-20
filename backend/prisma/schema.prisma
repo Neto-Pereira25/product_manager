@@ -55,7 +55,7 @@ model Coupon {
 
 model ProductDiscount {
   id        Int          @id @default(autoincrement())
-  productId Int          @unique
+  productId Int
   type      DiscountType
   value     Int? // Apenas se type == percent
   couponId  Int? // Apenas se type == coupon
@@ -64,4 +64,7 @@ model ProductDiscount {
 
   product Product @relation(fields: [productId], references: [id])
   coupon  Coupon? @relation(fields: [couponId], references: [id])
+
+  @@unique([productId, removedAt], name: "unique_active_discount_per_product")
+  @@index([productId])
 }

@@ -3,6 +3,7 @@ import cors from 'cors';
 import homeRouter from './src/routes/home.router';
 import productRouter from './src/routes/product.router';
 import couponRouter from './src/routes/coupon.router';
+import discountRouter from './src/routes/discount.router';
 
 class App {
     public app: Application;
@@ -23,6 +24,7 @@ class App {
         this.app.use('/api/v1/', homeRouter);
         this.app.use('/api/v1/products/', productRouter);
         this.app.use('/api/v1/coupons/', couponRouter);
+        this.app.use('/api/v1/', discountRouter);
     }
 }
 
