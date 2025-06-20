@@ -73,6 +73,8 @@ const controller = new ProductController();
  *                   type: string
  *                   format: date-time
  *                   nullable: true
+ *       200:
+ *         description: Produto restaurado
  *       409:
  *         description: Produto com mesmo nome já existe
  */
@@ -106,6 +108,8 @@ productRouter.get('/', controller.list);
  *     responses:
  *       200:
  *         description: Produto encontrado
+ *       400:
+ *         description: Erro de validação
  *       404:
  *         description: Produto não encontrado
  */
@@ -141,6 +145,8 @@ productRouter.get('/:id', controller.getById);
  *     responses:
  *       200:
  *         description: Produto atualizado
+ *       400:
+ *         description: Erro de validação
  *       404:
  *         description: Produto não encontrado
  */
@@ -162,6 +168,8 @@ productRouter.put('/:id', controller.update);
  *     responses:
  *       204:
  *         description: Produto deletado
+ *       400:
+ *         description: Erro de validação
  *       404:
  *         description: Produto não encontrado
  */
@@ -183,6 +191,8 @@ productRouter.delete('/:id', controller.softDelete);
  *     responses:
  *       200:
  *         description: Produto restaurado com sucesso
+ *       400:
+ *         description: Erro de validação
  *       404:
  *         description: Produto não encontrado
  */
