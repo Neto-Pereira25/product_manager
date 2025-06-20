@@ -1,18 +1,18 @@
 import { ProductService } from '../../src/services/ProductService';
 
+const mockRepo = {
+    findByNormalizedName: jest.fn(),
+    create: jest.fn(),
+    findById: jest.fn(),
+    update: jest.fn(),
+    softDelete: jest.fn(),
+    restore: jest.fn(),
+    list: jest.fn(),
+};
+
+const service = new ProductService(mockRepo as any);
+
 describe('ProductService - Unit Test', () => {
-    const mockRepo = {
-        findByNormalizedName: jest.fn(),
-        create: jest.fn(),
-        findById: jest.fn(),
-        update: jest.fn(),
-        softDelete: jest.fn(),
-        restore: jest.fn(),
-        list: jest.fn(),
-    };
-
-    const service = new ProductService(mockRepo as any);
-
     beforeEach(() => {
         jest.clearAllMocks();
     });
