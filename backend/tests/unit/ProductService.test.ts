@@ -52,4 +52,13 @@ describe('ProductService - Unit Test', () => {
         const result = await service.updateProduct(1, { stock: 99 });
         expect(result.stock).toBe(99);
     });
+
+    it('should throw error when trying to delete non-existent product', async () => {
+        mockRepo.findById.mockReturnValue(null);
+
+        await expect(service.softDeleteProduct(1233)).rejects.toEqual({
+            status: 404,
+            message: 'Recurso não encontrado',
+        });
+    });
 });
