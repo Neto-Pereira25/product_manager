@@ -107,4 +107,9 @@ describe('ProductDiscountService', () => {
         const result = await discountService.removeDiscount(productId);
         expect(result.removedAt).not.toBeNull();
     });
+
+    it('must apply coupon successfully after removing direct discount', async () => {
+        const result = await discountService.applyCouponDiscount(productId, couponCode);
+        expect(result.type).toBe('coupon');
+    });
 });
