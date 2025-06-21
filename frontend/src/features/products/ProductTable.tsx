@@ -31,9 +31,10 @@ export default function ProductTable() {
                 </thead>
                 <tbody>
                     {paginatedProducts.map((product) => {
+                        const price = parseFloat(product.price);
                         const finalPrice = calculateFinalPrice(product);
-                        const hasDiscount = product.productDiscount !== null;
                         const isOutOfStock = product.stock === 0;
+                        const hasDiscount = !!product.productDiscount;
 
                         return (
                             <tr key={product.id}>
@@ -54,10 +55,10 @@ export default function ProductTable() {
                                         </Badge>
                                     )}
                                 </td>
-                                <td>R$ {(product.price / 1).toFixed(2)}</td>
+                                <td>R$ {Number(price).toFixed(2)}</td>
                                 <td>
-                                    {hasDiscount ? (
-                                        <strong>R$ {(finalPrice / 1).toFixed(2)}</strong>
+                                    {finalPrice !== parseFloat(product.price) ? (
+                                        <strong>R$ {Number(finalPrice).toFixed(2)}</strong>
                                     ) : (
                                         '-'
                                     )}

@@ -3,6 +3,8 @@ import { getProducts } from '../services/products';
 import { filterProducts } from '../utils/filterProducts';
 import { paginate } from '../utils/paginate';
 import { persist } from 'zustand/middleware';
+import { getActiveDiscounts } from '../services/discount';
+import { mergeDiscountWithProducts } from '../utils/mergeDiscount';
 
 export type Coupon = {
     code: string;
@@ -15,7 +17,7 @@ export type Coupon = {
 export type ProductDiscount = {
     type: 'percent' | 'coupon';
     value?: number;
-    coupon?: Coupon;
+    couponId?: number | null;
 };
 
 export type Product = {
@@ -23,11 +25,11 @@ export type Product = {
     name: string;
     description?: string;
     stock: number;
-    price: number;
+    price: string;
     createAt: string;
     updateAt?: string;
     deletedAt?: string | null;
-    productDiscount?: ProductDiscount | null;
+    productDiscount?: ProductDiscount;
 };
 
 export type Filters = {
@@ -96,12 +98,23 @@ export const useProductStore = create<ProductStore>()(
             fetchProducts: async () => {
                 set({ loading: true });
                 try {
-                    const { data } = await getProducts();
+                    const [productsRes, discountsRes] = await Promise.all([
+                        getProducts(),
+                        getActiveDiscounts()
+                    ]);
+
+                    const productWithDiscounts = mergeDiscountWithProducts(
+                        productsRes.data,
+                        discountsRes.data
+                    );
+
+                    console.log('Produtos com desconto aplicado:', productWithDiscounts);
+
                     const state = get();
-                    const filtered = filterProducts(data, state.filters);
+                    const filtered = filterProducts(productWithDiscounts, state.filters);
                     const pages = Math.max(1, Math.ceil(filtered.length / state.itemsPerPage));
                     set({
-                        products: data,
+                        products: productWithDiscounts,
                         filteredProducts: filtered,
                         totalPages: pages,
                         paginatedProducts: paginate(filtered, 1, state.itemsPerPage),
