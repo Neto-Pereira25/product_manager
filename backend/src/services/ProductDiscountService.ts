@@ -120,4 +120,17 @@ export class ProductDiscountService {
 
         return discount;
     }
+
+    async findDiscounts() {
+        const discounts = await this.productDiscountRepository.listDiscounts();
+
+        if (!discounts) {
+            throw {
+                status: StatusCodes.NOT_FOUND,
+                message: 'Nenhum desconto ativo encontrado',
+            };
+        }
+
+        return discounts;
+    }
 }

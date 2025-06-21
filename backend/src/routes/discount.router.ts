@@ -13,9 +13,9 @@ const controller = new ProductDiscountController();
 
 /**
  * @swagger
- * /products/with-discounts:
+ * /products/with-discount:
  *   get:
- *     summary: Lista todos os produtos com desconto aplicado
+ *     summary: Lista todos os descontos aplicados num produto
  *     tags: [Discounts]
  *     responses:
  *       200:
@@ -27,7 +27,25 @@ const controller = new ProductDiscountController();
  *       500:
  *         description: Erro no servidor
  */
-discountRouter.get('/products/with-discounts/', controller.getDiscount);
+discountRouter.get('/products/with-discount/', controller.getDiscount);
+
+/**
+ * @swagger
+ * /products/with-discounts:
+ *   get:
+ *     summary: Lista todos os desconto aplicado em produtos
+ *     tags: [Discounts]
+ *     responses:
+ *       200:
+ *         description: Lista de descontos ativos
+ *       400:
+ *         description: Erro de validação
+ *       404:
+ *         description: Nenhum desconto ativo para o produto informado
+ *       500:
+ *         description: Erro no servidor
+ */
+discountRouter.get('/products/with-discounts/', controller.getDiscounts);
 
 /**
  * @swagger

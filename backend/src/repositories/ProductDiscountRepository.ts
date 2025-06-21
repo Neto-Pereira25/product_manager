@@ -69,4 +69,12 @@ export class ProductDiscountRepository {
             },
         });
     }
+
+    async listDiscounts() {
+        return prisma.productDiscount.findMany({
+            where: {
+                removedAt: null
+            }
+        });
+    }
 }

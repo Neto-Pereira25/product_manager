@@ -109,4 +109,15 @@ export class ProductDiscountController {
             standardHttpResponseError(res, e);
         }
     }
+
+    async getDiscounts(req: Request, res: Response) {
+
+        try {
+            const discounts = await service.findDiscounts();
+
+            standardHttpResponse(res, StatusCodes.OK, discounts);
+        } catch (e) {
+            standardHttpResponseError(res, e);
+        }
+    }
 }
