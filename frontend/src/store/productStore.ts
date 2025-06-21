@@ -63,38 +63,50 @@ export const useProductStore = create<ProductStore>((set, get) => ({
         hasDiscount: undefined
     },
     page: 1,
-    totalPages: 1,
     itemsPerPage: 10,
+    totalPages: 1,
 
     setFilters: (filters) => {
+        const state = get();
+        const newFilters = { ...state.filters, ...filters };
+        const filtered = filterProducts(state.products, newFilters);
+        const pages = Math.max(1, Math.ceil(filtered.length / state.itemsPerPage));
+
         set((state) => {
-            const newFilters = { ...state.filters, ...filters };
-            const filtered = filterProducts(state.products, newFilters);
-            const pages = Math.max(1, Math.ceil(filtered.length / state.itemsPerPage));
             return {
                 filters: newFilters,
                 filteredProducts: filtered,
-                page: 1,
                 totalPages: pages,
+                page: 1,
                 paginatedProducts: paginate(filtered, 1, state.itemsPerPage)
             };
         });
     },
 
-    setPage: (page) => set({ page }),
+    setPage: (page) => {
+        const { filteredProducts, itemsPerPage } = get();
+        const pages = Math.max(1, Math.ceil(filteredProducts.length / itemsPerPage));
+
+        set({
+            page,
+            totalPages: pages,
+            paginatedProducts: paginate(filteredProducts, page, itemsPerPage),
+        });
+    },
 
     fetchProducts: async () => {
         set({ loading: true });
 
         try {
             const { data } = await getProducts();
-            const filtered = filterProducts(data, get().filters);
-            const page = Math.max(1, Math.ceil(filterProducts.length / get().itemsPerPage));
+            const state = get();
+            const filtered = filterProducts(data, state.filters);
+            const page = Math.max(1, Math.ceil(filtered.length / state.itemsPerPage));
             set({
                 products: data,
                 filteredProducts: filtered,
                 totalPages: page,
-                paginatedProducts: paginate(filtered, 1, get().itemsPerPage),
+                paginatedProducts: paginate(filtered, 1, state.itemsPerPage),
                 page: 1
             });
         } catch (e: any) {
