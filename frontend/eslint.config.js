@@ -26,6 +26,7 @@ export default tseslint.config(
       ],
       semi: ["warn", "always"],
       quotes: ['error', 'single'],
+      'react-refresh/only-export-components': 'off'
     },
   },
 )
