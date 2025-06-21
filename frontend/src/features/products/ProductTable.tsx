@@ -54,10 +54,10 @@ export default function ProductTable() {
                                         </Badge>
                                     )}
                                 </td>
-                                <td>R$ {(product.price / 100).toFixed(2)}</td>
+                                <td>R$ {(product.price / 1).toFixed(2)}</td>
                                 <td>
                                     {hasDiscount ? (
-                                        <strong>R$ {(finalPrice / 100).toFixed(2)}</strong>
+                                        <strong>R$ {(finalPrice / 1).toFixed(2)}</strong>
                                     ) : (
                                         '-'
                                     )}
