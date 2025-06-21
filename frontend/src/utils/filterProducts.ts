@@ -1,6 +1,6 @@
 import type { Product, Filters } from '../store/productStore';
 
-export function filterProducts(products: Product[], filters: Filters) {
+export function filterProducts(products: Product[], filters: Filters): Product[] {
     return products.filter((product) => {
         const nameMatch = filters.search
             ? product.name.toLowerCase().includes(filters.search.toLowerCase())

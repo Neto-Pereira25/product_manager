@@ -27,7 +27,8 @@ export default tseslint.config(
       semi: ["warn", "always"],
       quotes: ['error', 'single'],
       'react-refresh/only-export-components': 'off',
-      '@typescript-eslint/no-explicit-any': 'off'
+      '@typescript-eslint/no-explicit-any': 'off',
+      'react-hooks/exhaustive-deps': 'off'
     },
   },
 )
