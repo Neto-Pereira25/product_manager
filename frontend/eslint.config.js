@@ -25,6 +25,7 @@ export default tseslint.config(
         { allowConstantExport: true },
       ],
       semi: ["warn", "always"],
+      quotes: ['error', 'single'],
     },
   },
 )
