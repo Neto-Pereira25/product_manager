@@ -7,6 +7,7 @@ import ProductTable from './features/products/ProductTable';
 import { useProductStore } from './store/productStore';
 import { useEffect } from 'react';
 import ProductFilters from './features/products/ProductFilters';
+import ProductPagination from './features/products/ProductPagination';
 
 function MainApp() {
   const { theme, toggleTheme } = useTheme();
@@ -39,6 +40,7 @@ function MainApp() {
         <h2 className='mb-4'>📦 Produtos</h2>
         <ProductFilters />
         <ProductTable />
+        <ProductPagination />
       </div>
     </div>
   );
