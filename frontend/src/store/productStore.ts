@@ -108,8 +108,6 @@ export const useProductStore = create<ProductStore>()(
                         discountsRes.data
                     );
 
-                    console.log('Produtos com desconto aplicado:', productWithDiscounts);
-
                     const state = get();
                     const filtered = filterProducts(productWithDiscounts, state.filters);
                     const pages = Math.max(1, Math.ceil(filtered.length / state.itemsPerPage));

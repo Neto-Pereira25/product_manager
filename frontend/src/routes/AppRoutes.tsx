@@ -1,10 +1,10 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
-import ProductFilters from '../features/products/ProductFilters';
-import ProductTable from '../features/products/ProductTable';
-import ProductPagination from '../features/products/ProductPagination';
-import ProductCreatePage from '../features/products/ProductCreatePage';
-import ProductEditPage from '../features/products/ProductEditPage';
 import { useEffect } from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import ProductFilters from '../components/products/ProductFilters';
+import ProductTable from '../components/products/ProductTable';
+import ProductPagination from '../components/products/ProductPagination';
+import ProductCreatePage from '../components/products/ProductCreatePage';
+import ProductEditPage from '../components/products/ProductEditPage';
 import { useProductStore } from '../store/productStore';
 
 export default function AppRoutes() {

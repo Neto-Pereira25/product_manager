@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { useProductStore } from '../../store/productStore';
+import { Button, Form, Modal } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import api from '../../services/api';
-import { Button, Form, Modal } from 'react-bootstrap';
+import { useProductStore } from '../../store/productStore';
 
 type ApplyCouponModalProps = {
     productId: number;
