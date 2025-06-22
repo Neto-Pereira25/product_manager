@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import { createProduct } from '../services/products';
 import ProductForm from '../components/products/ProductForm';
 import type { ProductFormData } from '../schemas/productSchema';
+import DashboardLayout from '../components/layouts/DashboardLayout';
 
 export default function ProductCreatePage() {
     const navigate = useNavigate();
@@ -19,9 +20,11 @@ export default function ProductCreatePage() {
     };
 
     return (
-        <div className="container py-4">
-            <h2 className="mb-3">Cadastrar Produto</h2>
-            <ProductForm onSubmit={handleCreate} />
-        </div>
+        <DashboardLayout title='Cadastrar Produto'>
+            <div className="container py-4">
+                {/* <h2 className="mb-3">Cadastrar Produto</h2> */}
+                <ProductForm onSubmit={handleCreate} />
+            </div>
+        </DashboardLayout>
     );
 }

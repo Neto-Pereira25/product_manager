@@ -30,12 +30,13 @@ export class ProductDiscountRepository {
         });
     }
 
-    async createCouponDiscount(productId: number, couponId: number, tx: Prisma.TransactionClient = prisma) {
+    async createCouponDiscount(productId: number, couponId: number, value: number, tx: Prisma.TransactionClient = prisma) {
         return tx.productDiscount.create({
             data: {
                 productId,
                 type: 'coupon',
                 couponId,
+                value
             },
         });
     }

@@ -6,6 +6,7 @@ import type { Product } from '../store/productStore';
 import type { ProductFormData } from '../schemas/productSchema';
 import { getProducts, updateProduct } from '../services/products';
 import ProductForm from '../components/products/ProductForm';
+import DashboardLayout from '../components/layouts/DashboardLayout';
 
 export default function ProductEditPage() {
     const { id } = useParams();
@@ -41,18 +42,20 @@ export default function ProductEditPage() {
     }
 
     return (
-        <div className="container py-4">
-            <h2 className="mb-3">Editar Produto</h2>
-            <ProductForm
-                initialValues={{
-                    name: product.name,
-                    description: product.description,
-                    price: parseFloat(product.price),
-                    stock: Number(product.stock),
-                }}
-                onSubmit={handleUpdate}
-                submitText='Editar'
-            />
-        </div>
+        <DashboardLayout title='Editar produto'>
+            <div className="container py-4">
+                {/* <h2 className="mb-3">Editar Produto</h2> */}
+                <ProductForm
+                    initialValues={{
+                        name: product.name,
+                        description: product.description,
+                        price: parseFloat(product.price),
+                        stock: Number(product.stock),
+                    }}
+                    onSubmit={handleUpdate}
+                    submitText='Editar'
+                />
+            </div>
+        </DashboardLayout>
     );
 }

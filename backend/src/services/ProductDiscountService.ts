@@ -90,7 +90,7 @@ export class ProductDiscountService {
 
         return await prisma.$transaction(async (tx) => {
             await this.productDiscountRepository.incrementCouponUsage(coupon.id, tx);
-            return this.productDiscountRepository.createCouponDiscount(productId, coupon.id, tx);
+            return this.productDiscountRepository.createCouponDiscount(productId, coupon.id, coupon.value.toNumber(), tx);
         });
 
     }
