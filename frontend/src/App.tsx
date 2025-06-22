@@ -1,21 +1,13 @@
-import { ThemeProvider, useTheme } from './theme/ThemeContext';
+import { Moon, Sun } from 'lucide-react';
+import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
-import { Moon, Sun } from 'lucide-react';
-import ProductTable from './features/products/ProductTable';
-import { useProductStore } from './store/productStore';
-import { useEffect } from 'react';
-import ProductFilters from './features/products/ProductFilters';
-import ProductPagination from './features/products/ProductPagination';
+import AppRoutes from './routes/AppRoutes';
+import { ThemeProvider, useTheme } from './theme/ThemeContext';
 
 function MainApp() {
   const { theme, toggleTheme } = useTheme();
-  const fetchProducts = useProductStore((s) => s.fetchProducts);
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
 
   return (
     <div className={'min-vh-100 p-4'}>
@@ -35,23 +27,19 @@ function MainApp() {
           )}
         </div>
       </button>
-      <h1>🛒 Gerenciador de Produtos</h1>
-      <div className='container py-4'>
-        <h2 className='mb-4'>📦 Produtos</h2>
-        <ProductFilters />
-        <ProductTable />
-        <ProductPagination />
-      </div>
+      <AppRoutes />
     </div>
   );
 }
 
 function App() {
   return (
-    <ThemeProvider>
-      <MainApp />
-      <ToastContainer />
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider>
+        <MainApp />
+        <ToastContainer position='top-right' autoClose={2500} />
+      </ThemeProvider>
+    </BrowserRouter>
   );
 }
 
