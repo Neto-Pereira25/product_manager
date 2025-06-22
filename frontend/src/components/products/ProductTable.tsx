@@ -1,5 +1,5 @@
 import { Edit, Tag } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Badge, Button, ButtonGroup, Spinner, Table } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useProductStore } from '../../store/productStore';
@@ -7,15 +7,20 @@ import { calculateFinalPrice } from '../../utils/calculateFinalPrice';
 import ApplyCouponModal from './ApplyCouponModal';
 import RemoveDiscountButton from './RemoveDiscountButton';
 import RemoveProductButton from './RemoveProductButton';
+import { useCouponStore } from '../../store/couponStore';
+import { formatDiscountLabel } from '../../utils/formatDiscountLabel';
 
 export default function ProductTable() {
     const navigate = useNavigate();
     const { products, paginatedProducts, loading } = useProductStore();
-
+    const { coupons, fetchCoupons } = useCouponStore();
 
     const [showCouponModal, setShowCouponModal] = useState(false);
     const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
 
+    useEffect(() => {
+        fetchCoupons();
+    }, []);
 
     if (loading) {
         return (
@@ -37,14 +42,7 @@ export default function ProductTable() {
     }
 
     return (
-        <div className='d-none d-md-block table-responsive'>
-            {/* <div className='d-flex justify-content-between align-items-center mb-3'>
-                <h5>{paginatedProducts.length} produtos encontrados nessa página</h5>
-                <Button variant='outline-success' onClick={() => navigate('/create')}>
-                    <Plus size={18} />
-                    Cadastrar Produto
-                </Button>
-            </div> */}
+        <div className='d-md-block table-responsive'>
             <Table hover className="mb-0">
                 <thead className='table-light'>
                     <tr>
@@ -94,9 +92,18 @@ export default function ProductTable() {
                                     <div className="d-flex flex-wrap gap-1">
                                         {isOutOfStock && <Badge bg="danger">Esgotado</Badge>}
                                         {hasDiscount && (
-                                            <Badge bg='success'>
-                                                -{((Number(product.price) - finalPrice) / Number(product.price) * 100).toFixed(0)}%
-                                            </Badge>
+                                            <>
+                                                {product.productDiscount?.type === 'percent' ? (
+                                                    <Badge bg='success'>
+                                                        -{((Number(product.price) - finalPrice) / Number(product.price) * 100).toFixed(0)}%
+                                                    </Badge>
+                                                ) : (
+                                                    <Badge bg='success'>
+                                                        {/* Chamar a função aqui */}
+                                                        {formatDiscountLabel(product, coupons)}
+                                                    </Badge>
+                                                )}
+                                            </>
                                         )}
                                     </div>
                                 </td>
@@ -116,7 +123,6 @@ export default function ProductTable() {
                                             <Button
                                                 size='sm'
                                                 variant='outline-success'
-                                                className='ms-2'
                                                 onClick={() => {
                                                     setSelectedProductId(product.id);
                                                     setShowCouponModal(true);

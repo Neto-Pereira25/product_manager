@@ -56,7 +56,7 @@ export default function ProductForm({
                 <Form.Control
                     type='number'
                     step='0.01'
-                    {...register('price')}
+                    {...register('price', { valueAsNumber: true })}
                     isInvalid={!!errors.price}
                 />
                 <Form.Control.Feedback type='invalid'>
@@ -69,7 +69,7 @@ export default function ProductForm({
                 <Form.Control
                     type='number'
                     step='1'
-                    {...register('stock')}
+                    {...register('stock', { valueAsNumber: true })}
                     isInvalid={!!errors.stock}
                 />
                 <Form.Control.Feedback type='invalid'>

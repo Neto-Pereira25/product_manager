@@ -48,7 +48,7 @@ export default function ProductEditPage() {
                     name: product.name,
                     description: product.description,
                     price: parseFloat(product.price),
-                    stock: product.stock,
+                    stock: Number(product.stock),
                 }}
                 onSubmit={handleUpdate}
                 submitText='Editar'
