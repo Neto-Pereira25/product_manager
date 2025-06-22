@@ -1,26 +1,26 @@
-import { XCircle } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
-import RemoveDiscountModal from './RemoveDiscountModal';
+import { Trash } from 'react-bootstrap-icons';
+import RemoveProductModal from './RemoveProductModal';
 
 type Props = {
     productId: number;
 };
 
-export default function RemoveDiscountButton({ productId }: Props) {
+export default function RemoveProductButton({ productId }: Props) {
     const [show, setShow] = useState(false);
 
     return (
         <>
             <Button
                 size='sm'
-                variant='outline-warning'
+                variant='outline-danger'
                 onClick={() => setShow(true)}
             >
-                <XCircle size={14} />
+                <Trash size={14} />
             </Button>
 
-            <RemoveDiscountModal
+            <RemoveProductModal
                 show={show}
                 onClose={() => setShow(false)}
                 productId={productId}

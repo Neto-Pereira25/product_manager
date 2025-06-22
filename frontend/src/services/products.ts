@@ -12,3 +12,7 @@ export const createProduct = (data: ProductFormData) => {
 export const updateProduct = (id: number, data: ProductFormData) => {
     return api.put(`/api/v1/products/${id}`, data);
 };
+
+export const removeProduct = (productId: number) => {
+    return api.delete(`/api/v1/products/${productId}`);
+};
