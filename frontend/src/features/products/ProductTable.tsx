@@ -5,10 +5,13 @@ import { calculateFinalPrice } from '../../utils/calculateFinalPrice';
 import { Edit, Plus } from 'lucide-react';
 import { useState } from 'react';
 import ApplyCouponModal from './ApplyCouponModal';
+import { removeDiscount } from '../../services/discount';
+import { toast } from 'react-toastify';
 
 export default function ProductTable() {
     const navigate = useNavigate();
     const { paginatedProducts, loading } = useProductStore();
+    const fetchProducts = useProductStore((s) => s.fetchProducts);
 
     const [showCouponModal, setShowCouponModal] = useState(false);
     const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
@@ -96,6 +99,23 @@ export default function ProductTable() {
                                         }}
                                     >
                                         Cupom
+                                    </Button>
+                                    <Button
+                                        size='sm'
+                                        variant='outline-danger'
+                                        className='ms-2'
+                                        onClick={async () => {
+                                            try {
+                                                await removeDiscount(product.id);
+                                                toast.success('Desconto removido!');
+                                                await fetchProducts();
+                                            } catch (e: any) {
+                                                console.log(e);
+                                                toast.error('Erro ao remover desconto');
+                                            }
+                                        }}
+                                    >
+                                        Remover Desconto
                                     </Button>
                                 </td>
                             </tr>

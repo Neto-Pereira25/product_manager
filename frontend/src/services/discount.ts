@@ -5,5 +5,5 @@ export const getActiveDiscounts = () => {
 };
 
 export const removeDiscount = (productId: number) => {
-    return api.post(`/api/v1/products/${productId}/discount`);
+    return api.delete(`/api/v1/products/${productId}/discount`);
 };
