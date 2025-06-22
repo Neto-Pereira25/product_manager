@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Alert, Button, Form, Modal } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import api from '../../services/api';
 import { useProductStore } from '../../store/productStore';
 import type { Product } from '../../store/productStore';
+import { useCouponStore } from '../../store/couponStore';
+import { getValidCoupons } from '../../utils/getValidCoupon';
 
 type ApplyCouponModalProps = {
     product: Product;
@@ -11,33 +13,23 @@ type ApplyCouponModalProps = {
     onClose: () => void;
 };
 
-export default function ApplyCouponModal({
+export default function ApplyDiscountModal({
     product,
     show,
     onClose
 }: ApplyCouponModalProps) {
     const [discountType, setDiscountType] = useState<'percent' | 'coupon'>('percent');
     const [percentValue, setPercentValue] = useState('');
-    const [couponCode, setCouponCode] = useState('');
+    const [couponId, setCouponId] = useState<number | ''>('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const fetchProducts = useProductStore((s) => s.fetchProducts);
+    const { coupons, fetchCoupons } = useCouponStore();
+    const validCoupons = getValidCoupons(coupons);
 
-    // const handleApplyCoupon = async () => {
-    //     if (!code) return toast.warning('Digite um código de cupom');
-
-    //     setLoading(true);
-    //     try {
-    //         await api.post(`/api/v1/products/${productId}/discount/coupon`, { code });
-    //         toast.success('Cupom aplicado com sucesso!');
-    //         await fetchProducts();
-    //     } catch (e: any) {
-    //         const msg = e?.response?.data?.message || 'Erro ao aplicar cupom';
-    //         toast.error(msg);
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // };
+    useEffect(() => {
+        fetchCoupons();
+    }, []);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -53,11 +45,18 @@ export default function ApplyCouponModal({
                 }
                 await api.post(`/api/v1/products/${product.id}/discount/percent`, { value });
             } else {
-                if (!couponCode.trim()) {
-                    setError('Digite o código do cupom.');
+                if (!couponId) {
+                    setError('Selecione um cupom válido.');
                     return;
                 }
-                await api.post(`/api/v1/products/${product.id}/discount/coupon`, { code: couponCode.trim() });
+
+                const selectedCoupon = validCoupons.find(c => c.id === couponId);
+                if (!selectedCoupon) {
+                    setError('Cupom inválido ou expirado.');
+                    return;
+                }
+
+                await api.post(`/api/v1/products/${product.id}/discount/coupon`, { code: selectedCoupon.code });
             }
 
             toast.success('Desconto aplicado com sucesso!');
@@ -113,15 +112,24 @@ export default function ApplyCouponModal({
                         </Form.Group>
                     ) : (
                         <Form.Group className="mb-3">
-                            <Form.Label>Código do Cupom</Form.Label>
-                            <Form.Control
-                                type="text"
-                                value={couponCode}
-                                onChange={(e) => setCouponCode(e.target.value)}
-                                placeholder="Ex: PROMO10"
+                            <Form.Label>Selecione o Cupom</Form.Label>
+                            <Form.Select
+                                value={couponId}
+                                onChange={(e) => setCouponId(Number(e.target.value))}
                                 required
-                            />
-                            <Form.Text className="text-muted">Digite o código do cupom promocional</Form.Text>
+                            >
+                                <option value="">-- Selecione um cupom --</option>
+                                {validCoupons.map((c) => (
+                                    <option key={c.id} value={c.id}>
+                                        {c.code} ({c.type === 'percent' ? `-${c.value}%` : `-R$ ${Number(c.value).toFixed(2)}`})
+                                    </option>
+                                ))}
+                            </Form.Select>
+                            {validCoupons.length === 0 && (
+                                <Form.Text className="text-muted">
+                                    Nenhum cupom válido disponível.
+                                </Form.Text>
+                            )}
                         </Form.Group>
                     )}
                 </Modal.Body>

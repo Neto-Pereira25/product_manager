@@ -4,7 +4,7 @@ import { Badge, Button, ButtonGroup, Card, Spinner, Table } from 'react-bootstra
 import { useNavigate } from 'react-router-dom';
 import { useProductStore, type Product } from '../store/productStore';
 import { calculateFinalPrice } from '../utils/calculateFinalPrice';
-import ApplyCouponModal from '../components/products/ApplyCouponModal';
+import ApplyDiscountModal from '../components/products/ApplyDiscountModal';
 import RemoveDiscountButton from '../components/products/RemoveDiscountButton';
 import RemoveProductButton from '../components/products/RemoveProductButton';
 import { useCouponStore } from '../store/couponStore';
@@ -141,7 +141,7 @@ export default function ProductTable() {
                         })}
                     </tbody>
                     {selectedProduct && (
-                        <ApplyCouponModal
+                        <ApplyDiscountModal
                             product={selectedProduct}
                             show={showCouponModal}
                             onClose={() => {
