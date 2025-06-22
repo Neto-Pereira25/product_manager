@@ -1,17 +1,16 @@
-import { useNavigate } from 'react-router-dom';
-import { Table, Badge, Spinner, Button } from 'react-bootstrap';
-import { useProductStore } from '../../store/productStore';
-import { calculateFinalPrice } from '../../utils/calculateFinalPrice';
 import { Edit, Plus } from 'lucide-react';
 import { useState } from 'react';
+import { Badge, Button, Spinner, Table } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import { useProductStore } from '../../store/productStore';
+import { calculateFinalPrice } from '../../utils/calculateFinalPrice';
 import ApplyCouponModal from './ApplyCouponModal';
-import { removeDiscount } from '../../services/discount';
-import { toast } from 'react-toastify';
+import RemoveDiscountButton from './RemoveDiscountButton';
 
 export default function ProductTable() {
     const navigate = useNavigate();
     const { paginatedProducts, loading } = useProductStore();
-    const fetchProducts = useProductStore((s) => s.fetchProducts);
+
 
     const [showCouponModal, setShowCouponModal] = useState(false);
     const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
@@ -30,7 +29,7 @@ export default function ProductTable() {
     return (
         <div className='table-responsive'>
             <div className='d-flex justify-content-between align-items-center mb-3'>
-                <h5>Produtos encontradoso: {paginatedProducts.length}</h5>
+                <h5>{paginatedProducts.length} produtos encontrados nessa página</h5>
                 <Button variant='outline-success' onClick={() => navigate('/create')}>
                     <Plus size={18} />
                     Cadastrar Produto
@@ -100,23 +99,7 @@ export default function ProductTable() {
                                     >
                                         Cupom
                                     </Button>
-                                    <Button
-                                        size='sm'
-                                        variant='outline-danger'
-                                        className='ms-2'
-                                        onClick={async () => {
-                                            try {
-                                                await removeDiscount(product.id);
-                                                toast.success('Desconto removido!');
-                                                await fetchProducts();
-                                            } catch (e: any) {
-                                                console.log(e);
-                                                toast.error('Erro ao remover desconto');
-                                            }
-                                        }}
-                                    >
-                                        Remover Desconto
-                                    </Button>
+                                    <RemoveDiscountButton productId={product.id} />
                                 </td>
                             </tr>
                         );
