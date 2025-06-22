@@ -120,7 +120,7 @@ export default function DashboardLayout({ children, title }: DashboardLayoutProp
                 <Col className='d-flex flex-column p-0 overflow-hidden'>
                     {/* Topbar Desktop */}
                     <Navbar className={`shadow-sm px-3 d-none d-md-flex justify-content-between ${bgNavbar}`} expand='md'>
-                        <Navbar.Text className='fw-bold'>{title}</Navbar.Text>
+                        <Navbar.Text className={`fw-bold ${isDark ? 'text-light' : 'text-dark'}`}>{title}</Navbar.Text>
                         <div className="d-flex gap-2 align-items-center">
                             <ThemeToggle />
                         </div>
@@ -128,7 +128,7 @@ export default function DashboardLayout({ children, title }: DashboardLayoutProp
 
                     {/* Page Title Mobile */}
                     <div className="d-md-none px-3 py-2 border-bottom">
-                        <h1 className="h5 m-0">{title}</h1>
+                        <h1 className={`h5 m-0 ${isDark ? 'text-light' : 'text-dark'}`}>{title}</h1>
                     </div>
 
                     {/* Content */}
