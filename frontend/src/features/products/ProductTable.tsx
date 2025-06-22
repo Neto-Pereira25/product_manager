@@ -1,11 +1,12 @@
-import { Table, Badge, Spinner } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import { Table, Badge, Spinner, Button } from 'react-bootstrap';
 import { useProductStore } from '../../store/productStore';
 import { calculateFinalPrice } from '../../utils/calculateFinalPrice';
+import { Edit, Plus } from 'lucide-react';
 
 export default function ProductTable() {
+    const navigate = useNavigate();
     const { paginatedProducts, loading } = useProductStore();
-
-    console.log('produtos:', paginatedProducts);
 
     if (loading) {
         return (
@@ -19,6 +20,13 @@ export default function ProductTable() {
 
     return (
         <div className='table-responsive'>
+            <div className='d-flex justify-content-between align-items-center mb-3'>
+                <h5>Produtos encontradoso: {paginatedProducts.length}</h5>
+                <Button variant='outline-success' onClick={() => navigate('/create')}>
+                    <Plus size={18} />
+                    Cadastrar Produto
+                </Button>
+            </div>
             <Table>
                 <thead className='table-dark'>
                     <tr>
@@ -27,6 +35,7 @@ export default function ProductTable() {
                         <th>Estoque</th>
                         <th>Preço Original</th>
                         <th>Preço com Desconto</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -62,6 +71,15 @@ export default function ProductTable() {
                                     ) : (
                                         '-'
                                     )}
+                                </td>
+                                <td>
+                                    <Button
+                                        size='sm'
+                                        variant='outline-primary'
+                                        onClick={() => navigate(`/edit/${product.id}`)}
+                                    >
+                                        <Edit size={18} />
+                                    </Button>
                                 </td>
                             </tr>
                         );
