@@ -3,10 +3,16 @@ import { Table, Badge, Spinner, Button } from 'react-bootstrap';
 import { useProductStore } from '../../store/productStore';
 import { calculateFinalPrice } from '../../utils/calculateFinalPrice';
 import { Edit, Plus } from 'lucide-react';
+import { useState } from 'react';
+import ApplyCouponModal from './ApplyCouponModal';
 
 export default function ProductTable() {
     const navigate = useNavigate();
     const { paginatedProducts, loading } = useProductStore();
+
+    const [showCouponModal, setShowCouponModal] = useState(false);
+    const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
+
 
     if (loading) {
         return (
@@ -80,12 +86,33 @@ export default function ProductTable() {
                                     >
                                         <Edit size={18} />
                                     </Button>
+                                    <Button
+                                        size='sm'
+                                        variant='outline-success'
+                                        className='ms-2'
+                                        onClick={() => {
+                                            setSelectedProductId(product.id);
+                                            setShowCouponModal(true);
+                                        }}
+                                    >
+                                        Cupom
+                                    </Button>
                                 </td>
                             </tr>
                         );
                     })}
                 </tbody>
             </Table>
+            {selectedProductId !== null && (
+                <ApplyCouponModal
+                    productId={selectedProductId}
+                    show={showCouponModal}
+                    onClose={() => {
+                        setShowCouponModal(false);
+                        setSelectedProductId(null);
+                    }}
+                />
+            )}
         </div>
     );
 }
