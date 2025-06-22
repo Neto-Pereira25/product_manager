@@ -9,7 +9,7 @@ export default function Logo({ showText = true }: LogoProps) {
         <div className='d-flex align-items-center gap-2'>
             <ShoppingCart className='text-primary' />
             {showText && (
-                <span className='fw-bold fs-5'>
+                <span className='fw-bold fs-5 d-none d-md-inline text-truncate'>
                     Cupom<span className='text-primary'>.stock</span>
                 </span>
             )}

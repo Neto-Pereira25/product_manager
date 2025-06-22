@@ -1,7 +1,7 @@
-import { HelpCircle, Info, Menu, ShoppingCart, X } from 'lucide-react';
 import { useState } from 'react';
-import { Button, Col, Container, Nav, Navbar, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { Button, Col, Container, Nav, Navbar, Row } from 'react-bootstrap';
+import { HelpCircle, Info, Menu, ShoppingCart, X } from 'lucide-react';
 
 import { useTheme } from '../../theme/ThemeContext';
 import Logo from '../Logo';
