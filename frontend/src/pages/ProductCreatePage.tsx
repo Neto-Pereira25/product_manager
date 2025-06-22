@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { createProduct } from '../../services/products';
-import ProductForm from './ProductForm';
-import type { ProductFormData } from '../../schemas/productSchema';
+import { createProduct } from '../services/products';
+import ProductForm from '../components/products/ProductForm';
+import type { ProductFormData } from '../schemas/productSchema';
 
 export default function ProductCreatePage() {
     const navigate = useNavigate();

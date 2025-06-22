@@ -3,8 +3,8 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import ProductFilters from '../components/products/ProductFilters';
 import ProductTable from '../components/products/ProductTable';
 import ProductPagination from '../components/products/ProductPagination';
-import ProductCreatePage from '../components/products/ProductCreatePage';
-import ProductEditPage from '../components/products/ProductEditPage';
+import ProductCreatePage from '../pages/ProductCreatePage';
+import ProductEditPage from '../pages/ProductEditPage';
 import { useProductStore } from '../store/productStore';
 
 export default function AppRoutes() {

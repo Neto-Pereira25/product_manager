@@ -35,7 +35,7 @@ export default function ProductFilters() {
     return (
         <Form className='mb=4'>
             <Row className='g-2'>
-                <Col md={4}>
+                <Col xs={12} md={4}>
                     <Form.Label>🔍 Buscar por nome</Form.Label>
                     <Form.Control
                         type='text'
@@ -44,7 +44,7 @@ export default function ProductFilters() {
                         onChange={(e) => setSearch(e.target.value)}
                     />
                 </Col>
-                <Col md={2}>
+                <Col xs={6} md={2}>
                     <Form.Label>💲 Preço mínimo</Form.Label>
                     <Form.Control
                         type='number'
@@ -53,7 +53,7 @@ export default function ProductFilters() {
                         min={0}
                     />
                 </Col>
-                <Col md={2}>
+                <Col xs={6} md={2}>
                     <Form.Label>💲 Preço máximo</Form.Label>
                     <Form.Control
                         type='number'
@@ -62,7 +62,7 @@ export default function ProductFilters() {
                         min={0}
                     />
                 </Col>
-                <Col md={2} className="d-flex align-items-end">
+                <Col xs={12} md={2} className="d-flex align-items-end">
                     <Form.Check
                         type='checkbox'
                         id='has-discount'
@@ -71,7 +71,7 @@ export default function ProductFilters() {
                         onChange={(e) => setHasDiscount(e.target.checked)}
                     />
                 </Col>
-                <Col md={2} className="d-flex align-items-end justify-content-between">
+                <Col xs={12} md={2} className="d-flex align-items-end justify-content-between">
                     <Button variant='outline-primary' onClick={applyFilters}>
                         Aplicar
                     </Button>

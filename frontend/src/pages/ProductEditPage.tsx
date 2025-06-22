@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Spinner } from 'react-bootstrap';
-import type { Product } from '../../store/productStore';
-import type { ProductFormData } from '../../schemas/productSchema';
-import { getProducts, updateProduct } from '../../services/products';
-import ProductForm from './ProductForm';
+import type { Product } from '../store/productStore';
+import type { ProductFormData } from '../schemas/productSchema';
+import { getProducts, updateProduct } from '../services/products';
+import ProductForm from '../components/products/ProductForm';
 
 export default function ProductEditPage() {
     const { id } = useParams();
