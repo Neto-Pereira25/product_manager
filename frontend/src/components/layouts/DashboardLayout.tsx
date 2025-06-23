@@ -1,7 +1,7 @@
+import { HelpCircle, Home, Info, Menu, Settings, ShoppingCart, X } from 'lucide-react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { Button, Col, Container, Nav, Navbar, Row } from 'react-bootstrap';
-import { HelpCircle, Info, Menu, Settings, ShoppingCart, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 import { useTheme } from '../../theme/ThemeContext';
 import Logo from '../Logo';
@@ -87,7 +87,7 @@ export default function DashboardLayout({ children, title }: DashboardLayoutProp
                     <Logo />
                 </div>
                 <Nav className='flex-column px-3 pt-3'>
-                    <NavItem to='/' icon={<ShoppingCart size={18} />} variant={theme} onClick={closeMobileMenu}>
+                    <NavItem to='/' icon={<Home size={18} />} variant={theme} onClick={closeMobileMenu}>
                         Dashboard
                     </NavItem>
                     <NavItem to='/products' icon={<ShoppingCart size={18} />} variant={theme} onClick={closeMobileMenu}>
@@ -115,7 +115,7 @@ export default function DashboardLayout({ children, title }: DashboardLayoutProp
                         <Logo />
                     </Link>
                     <Nav className='flex-column'>
-                        <NavItem to='/' icon={<ShoppingCart size={18} />} variant={theme} onClick={closeMobileMenu}>
+                        <NavItem to='/' icon={<Home size={18} />} variant={theme} onClick={closeMobileMenu}>
                             Dashboard
                         </NavItem>
                         <NavItem to='/products' icon={<ShoppingCart size={18} />} variant={theme} onClick={closeMobileMenu}>
