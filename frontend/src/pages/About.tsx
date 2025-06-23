@@ -58,7 +58,7 @@ export default function About() {
 
     return (
         <DashboardLayout title='Sobre o Desenvolvedor'>
-            <Container className='px-3 px-md-5'>
+            <Container className='px-3 px-md-1'>
                 {/* Sobre o Projeto */}
                 <Card className={`${cardClass} mb-4`}>
                     <Card.Header className={'d-flex align-items-center gap-2 fw-bold border-bottom'}>
@@ -120,7 +120,7 @@ export default function About() {
                                         >
                                             {icon}
                                         </div>
-                                        <small className="d-block mt-1 text-muted">{name}</small>
+                                        <small className={`d-block mt-1 fw-bold ${isDark ? 'text-light' : 'text-dark'}`}>{name}</small>
                                     </Col>
                                 ))}
                             </Row>
