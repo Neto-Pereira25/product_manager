@@ -26,8 +26,8 @@ export type Product = {
     description?: string;
     stock: number;
     price: string;
-    createAt: string;
-    updateAt?: string;
+    createdAt: string;
+    updatedAt?: string;
     deletedAt?: string | null;
     productDiscount?: ProductDiscount;
 };
