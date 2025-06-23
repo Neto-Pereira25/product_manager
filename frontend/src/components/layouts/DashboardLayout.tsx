@@ -1,4 +1,4 @@
-import { HelpCircle, Home, Info, Menu, Settings, ShoppingCart, X } from 'lucide-react';
+import { BarChart3, HelpCircle, Home, Info, Menu, Settings, ShoppingCart, X } from 'lucide-react';
 import { useState } from 'react';
 import { Button, Col, Container, Nav, Navbar, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -93,6 +93,9 @@ export default function DashboardLayout({ children, title }: DashboardLayoutProp
                     <NavItem to='/products' icon={<ShoppingCart size={18} />} variant={theme} onClick={closeMobileMenu}>
                         Lista de Produtos
                     </NavItem>
+                    <NavItem to='/reports' icon={<BarChart3 size={18} />} variant={theme} onClick={closeMobileMenu}>
+                        Relatório
+                    </NavItem>
                     <NavItem to='/administration' icon={<Settings size={18} />} variant={theme} onClick={closeMobileMenu}>
                         Administração
                     </NavItem>
@@ -120,6 +123,9 @@ export default function DashboardLayout({ children, title }: DashboardLayoutProp
                         </NavItem>
                         <NavItem to='/products' icon={<ShoppingCart size={18} />} variant={theme} onClick={closeMobileMenu}>
                             Lista de Produtos
+                        </NavItem>
+                        <NavItem to='/reports' icon={<BarChart3 size={18} />} variant={theme} onClick={closeMobileMenu}>
+                            Relatório
                         </NavItem>
                         <NavItem to='/administration' icon={<Settings size={18} />} variant={theme} onClick={closeMobileMenu}>
                             Administração

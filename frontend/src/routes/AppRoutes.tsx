@@ -9,6 +9,7 @@ import ProductEditPage from '../pages/ProductEditPage';
 import { useProductStore } from '../store/productStore';
 import { Administration } from '../pages/Administration';
 import Dashboard from '../pages/Dashboard';
+import Reports from '../pages/Reports';
 
 export default function AppRoutes() {
     const fetchProducts = useProductStore((s) => s.fetchProducts);
@@ -21,6 +22,7 @@ export default function AppRoutes() {
         <Routes>
             <Route path='/' element={<Dashboard />} />
             <Route path='/products' element={<ProductCatalog />} />
+            <Route path='/reports' element={<Reports />} />
             <Route path='/create' element={<ProductCreatePage />} />
             <Route path='/edit/:id' element={<ProductEditPage />} />
             <Route path='/how-to-use' element={<HowToUse />} />
