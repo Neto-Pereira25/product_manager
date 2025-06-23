@@ -1,6 +1,7 @@
+import { BadgePercent, BrushCleaning, Edit, Filter, Lightbulb, PackagePlus, Percent, ShoppingCart, TicketPercent, Trash, XCircle } from 'lucide-react';
 import { Card, Container } from 'react-bootstrap';
+import { CircleHalf } from 'react-bootstrap-icons';
 import DashboardLayout from '../components/layouts/DashboardLayout';
-import { BadgePercent, BrushCleaning, Edit, Filter, Lightbulb, ShoppingCart, Trash } from 'lucide-react';
 import { useTheme } from '../theme/ThemeContext';
 
 export default function HowToUse() {
@@ -13,16 +14,17 @@ export default function HowToUse() {
 
     return (
         <DashboardLayout title='Como Usar'>
-            <Container fluid className="px-3 px-md-5">
+            <Container fluid className="px-2 px-md-1">
                 {/* Produtos */}
                 <Card className={`mb-4 ${cardClass}`}>
-                    <Card.Header className={`d-flex align-items-center gap-2 fw-bold ${isDark ? 'bg-secondary' : ''}`}>
+                    <Card.Header className={'d-flex align-items-center gap-2 fw-bold border-bottom'}>
                         <ShoppingCart size={20} />
                         Gerenciamento de Produtos
                     </Card.Header>
                     <Card.Body>
                         <div className='mb-3'>
                             <h5 className='fw-semibold d-flex align-items-center gap-2'>
+                                <PackagePlus size={20} />
                                 Cadastro de Produtos
                             </h5>
                             <p className={`${textMutedClass} mb-0`}>
@@ -54,20 +56,26 @@ export default function HowToUse() {
 
                 {/* Descontos e Cupons */}
                 <Card className={`mb-4 ${cardClass}`}>
-                    <Card.Header className={`d-flex align-items-center gap-2 fw-bold ${isDark ? 'bg-secondary' : ''}`}>
+                    <Card.Header className={'d-flex align-items-center gap-2 fw-bold border-bottom'}>
                         <BadgePercent size={20} />
                         Aplicação de Descontos
                     </Card.Header>
                     <Card.Body>
                         <div className='mb-3'>
-                            <h5 className="fw-semibold">Desconto Percentual</h5>
+                            <h5 className='fw-semibold d-flex align-items-center gap-2'>
+                                <Percent size={20} />
+                                Desconto Percentual
+                            </h5>
                             <p className={`${textMutedClass} mb-0`}>
                                 Aplique um percentual de desconto diretamente no produto. Ex: 10% de desconto.
                             </p>
                         </div>
 
                         <div className='mb-3'>
-                            <h5 className="fw-semibold">Cupom Promocional</h5>
+                            <h5 className='fw-semibold d-flex align-items-center gap-2'>
+                                <TicketPercent size={20} />
+                                Cupom Promocional
+                            </h5>
                             <p className={`${textMutedClass} mb-0`}>
                                 Você pode aplicar um cupom previamente cadastrado. O sistema mostra apenas cupons válidos, com informações como:
                             </p>
@@ -79,7 +87,10 @@ export default function HowToUse() {
                         </div>
 
                         <div>
-                            <h5 className="fw-semibold">Remoção de Desconto</h5>
+                            <h5 className='fw-semibold d-flex align-items-center gap-2'>
+                                <XCircle size={20} />
+                                Remoção de Desconto
+                            </h5>
                             <p className={`${textMutedClass} mb-0`}>
                                 Clique no botão de remover para excluir o desconto aplicado ao produto.
                                 Uma vez feito isso o mesmo desconto não poderá ser aplicado novamente a esse produto
@@ -90,13 +101,16 @@ export default function HowToUse() {
 
                 {/* Filtros, Paginação e Tema */}
                 <Card className={`mb-4 ${cardClass}`}>
-                    <Card.Header className={`d-flex align-items-center gap-2 fw-bold ${isDark ? 'bg-secondary' : ''}`}>
+                    <Card.Header className={'d-flex align-items-center gap-2 fw-bold border-bottom'}>
                         <Lightbulb size={20} />
                         Dicas de Navegação
                     </Card.Header>
                     <Card.Body>
                         <div className='mb-3'>
-                            <h5 className='fw-semibold'>Filtros e Paginação</h5>
+                            <h5 className='fw-semibold d-flex align-items-center gap-2'>
+                                <Filter size={20} />
+                                Filtros e Paginação
+                            </h5>
                             <p className={`${textMutedClass} mb-0`}>
                                 Use os filtros para buscar produtos por nome, faixa de preço ou com desconto.
                                 Uma vez que você tenha selecionado os filtros é necessário aplicá-los apertando o botão <span className='p-1'><Filter size={18} /></span>.
@@ -104,7 +118,10 @@ export default function HowToUse() {
                         </div>
 
                         <div className='mb-3'>
-                            <h5 className='fw-semibold d-flex align-items-center gap-2'>Alternância de Tema</h5>
+                            <h5 className='fw-semibold d-flex align-items-center gap-2'>
+                                <CircleHalf size={20} />
+                                Alternância de Tema
+                            </h5>
                             <p className={`${textMutedClass} mb-0`}>
                                 Você pode alternar entre o modo claro e escuro usando o botão de tema na barra superior.
                             </p>

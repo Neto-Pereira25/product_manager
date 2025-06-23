@@ -37,7 +37,7 @@ export default function DashboardLayout({ children, title }: DashboardLayoutProp
 
     const isDark = theme === 'dark';
     const bgSidebar = isDark ? 'bg-dark text-light' : 'bg-light text-dark';
-    const bgNavbar = isDark ? 'bg-secondary text-white' : 'bg-white text-dark';
+    const bgNavbar = isDark ? 'bg-dark text-white border-bottom' : 'bg-white text-dark';
 
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -81,11 +81,11 @@ export default function DashboardLayout({ children, title }: DashboardLayoutProp
                 </div>
                 <Nav className='flex-column px-3 pt-3'>
                     <NavItem to='/' icon={<ShoppingCart size={18} />} variant={theme} onClick={closeMobileMenu}>
-                        Listas de Produtos
+                        Lista de Produtos
                     </NavItem>
                     <div className='border-top mt-3 pt-3'>
                         <NavItem to='/how-to-use' icon={<HelpCircle size={18} />} variant={theme} onClick={closeMobileMenu}>
-                            Como usar
+                            Como Usar
                         </NavItem>
                         <NavItem to='/about' icon={<Info size={18} />} variant={theme} onClick={closeMobileMenu}>
                             Sobre
@@ -103,11 +103,11 @@ export default function DashboardLayout({ children, title }: DashboardLayoutProp
                     </Link>
                     <Nav className='flex-column'>
                         <NavItem to='/' icon={<ShoppingCart size={18} />} variant={theme} onClick={closeMobileMenu}>
-                            Listas de Produtos
+                            Lista de Produtos
                         </NavItem>
                         <div className='border-top mt-3 pt-3'>
                             <NavItem to='/how-to-use' icon={<HelpCircle size={18} />} variant={theme} onClick={closeMobileMenu}>
-                                Como usar
+                                Como Usar
                             </NavItem>
                             <NavItem to='/about' icon={<Info size={18} />} variant={theme} onClick={closeMobileMenu}>
                                 Sobre
@@ -127,12 +127,12 @@ export default function DashboardLayout({ children, title }: DashboardLayoutProp
                     </Navbar>
 
                     {/* Page Title Mobile */}
-                    <div className="d-md-none px-3 py-2 border-bottom">
+                    <div className={`${isDark ? 'bg-dark' : 'bg-light'} d-md-none px-3 py-2 border-bottom`}>
                         <h1 className={`h5 m-0 ${isDark ? 'text-light' : 'text-dark'}`}>{title}</h1>
                     </div>
 
                     {/* Content */}
-                    <main className='flex-grow-1 overflow-y-auto p-4'>
+                    <main className='flex-grow-1 overflow-y-auto py-3 px-4'>
                         {children}
                     </main>
                 </Col>

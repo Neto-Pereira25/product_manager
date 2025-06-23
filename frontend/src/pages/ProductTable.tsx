@@ -1,13 +1,15 @@
 import { Edit, Tag } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { Badge, Button, ButtonGroup, Card, Spinner, Table } from 'react-bootstrap';
+import { Badge, Button, ButtonGroup, Col, Row, Spinner, Table } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { useProductStore, type Product } from '../store/productStore';
-import { calculateFinalPrice } from '../utils/calculateFinalPrice';
 import ApplyDiscountModal from '../components/products/ApplyDiscountModal';
+import ProductCard from '../components/products/ProductCard';
 import RemoveDiscountButton from '../components/products/RemoveDiscountButton';
 import RemoveProductButton from '../components/products/RemoveProductButton';
 import { useCouponStore } from '../store/couponStore';
+import { useProductStore, type Product } from '../store/productStore';
+import { useTheme } from '../theme/ThemeContext';
+import { calculateFinalPrice } from '../utils/calculateFinalPrice';
 import { formatDiscountLabel } from '../utils/formatDiscountLabel';
 
 export default function ProductTable() {
@@ -17,6 +19,15 @@ export default function ProductTable() {
 
     const [showCouponModal, setShowCouponModal] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+
+    const { theme } = useTheme();
+    const isDark = theme === 'dark';
+
+    const textMutedClass = isDark ? 'text-secondary' : 'text-muted';
+    const tableBodyClass = isDark ? 'bg-dark' : '';
+    const tableClass = isDark ? 'table-dark table-hover' : 'table-light table-hover';
+    const headBg = isDark ? 'bg-secondary' : 'bg-light';
+    const mutedClass = isDark ? 'text-secondary' : 'text-muted';
 
     useEffect(() => {
         fetchCoupons();
@@ -35,8 +46,8 @@ export default function ProductTable() {
     if (products.length === 0) {
         return (
             <div className='text-center p-4'>
-                <p className='text-muted'>Nenhum produto encontrado</p>
-                <p className='text-muted'>Cadastre alguns produtos para poder vê-los</p>
+                <p className={`${textMutedClass}`}>Nenhum produto encontrado</p>
+                <p className={`${textMutedClass}`}>Cadastre alguns produtos para poder vê-los</p>
             </div>
         );
     }
@@ -44,8 +55,8 @@ export default function ProductTable() {
     return (
         <>
             <div className='d-none d-md-block table-responsive'>
-                <Table hover className='mb-0'>
-                    <thead className='table-light'>
+                <Table hover className={`mb-0 ${tableClass} border`}>
+                    <thead className={`${headBg}`}>
                         <tr>
                             <th>Nome</th>
                             <th>Descrição</th>
@@ -55,7 +66,7 @@ export default function ProductTable() {
                             <th className='text-center'>Ações</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className={`${tableBodyClass}`}>
                         {paginatedProducts.map((product) => {
                             const price = parseFloat(product.price);
                             const finalPrice = calculateFinalPrice(product);
@@ -65,11 +76,11 @@ export default function ProductTable() {
                             return (
                                 <tr key={product.id}>
                                     <td className='fw-medium'>
-                                        {product.name}
+                                        {product.name.charAt(0).toUpperCase() + product.name.slice(1)}
                                     </td>
 
                                     <td>
-                                        <div className='text-truncate-2' style={{ maxWidth: '200px' }}>
+                                        <div className={`text-truncate-2 ${mutedClass}`} style={{ maxWidth: '200px' }}>
                                             {product.description || '-'}
                                         </div>
                                     </td>
@@ -77,7 +88,7 @@ export default function ProductTable() {
                                     <td>
                                         {hasDiscount ? (
                                             <>
-                                                <div className='text-muted text-decoration-line-through'>
+                                                <div className={`${mutedClass} text-decoration-line-through`}>
                                                     {price}
                                                 </div>
                                                 <div className='fw-bold text-success'>
@@ -155,99 +166,13 @@ export default function ProductTable() {
             </div>
 
             <div className="d-md-none">
-                {paginatedProducts.map(product => {
-                    const price = parseFloat(product.price);
-                    const finalPrice = calculateFinalPrice(product);
-                    const isOutOfStock = product.stock === 0;
-                    const hasDiscount = !!product.productDiscount;
-                    return (
-                        <Card className='mb-3'>
-                            <Card.Body>
-                                <div className='d-flex justify-content-between align-items-start mb-2'>
-                                    <h6 className='card-title mb-1 fw-bold'>{product.name}</h6>
-                                    <div className='d-flex flex-wrap gap-1'>
-                                        {isOutOfStock && (
-                                            <Badge bg='danger' className='badge-stock-out'>
-                                                Esgotado
-                                            </Badge>
-                                        )}
-                                        {hasDiscount && (
-                                            <>
-                                                {product.productDiscount?.type === 'percent' ? (
-                                                    <Badge bg='success' className='badge-discount'>
-                                                        -{((Number(product.price) - finalPrice) / Number(product.price) * 100).toFixed(0)}%
-                                                    </Badge>
-                                                ) : (
-                                                    <Badge bg='success' className='badge-discount'>
-                                                        {formatDiscountLabel(product, coupons)}
-                                                    </Badge>
-                                                )}
-                                            </>
-                                        )}
-                                    </div>
-                                </div>
-
-                                <p className='card-text small text-muted mb-2'>{product.description}</p>
-
-                                <div className='row mb-2'>
-                                    <div className='col-6'>
-                                        <small className='text-muted'>Preço:</small>
-                                        <div>
-                                            {hasDiscount ? (
-                                                <>
-                                                    <div className='text-muted small text-decoration-line-through'>
-                                                        {price}
-                                                    </div>
-                                                    <div className='fw-bold text-success'>
-                                                        {finalPrice.toFixed(2)}
-                                                    </div>
-                                                </>
-                                            ) : (
-                                                <>
-                                                    <span className='fw-bold'>{price}</span>
-                                                </>
-                                            )}
-                                        </div>
-                                    </div>
-
-                                    <div className='col-6'>
-                                        <small className='text-muted'>Estoque:</small>
-                                        <div className='fw-bold'>{product.stock}</div>
-                                    </div>
-                                </div>
-
-                                <div className='d-flex justify-content-end'>
-                                    <ButtonGroup size='sm'>
-                                        <Button
-                                            size='sm'
-                                            variant='outline-primary'
-                                            onClick={() => navigate(`/edit/${product.id}`)}
-                                        >
-                                            <Edit size={14} />
-                                        </Button>
-                                        {hasDiscount ? (
-                                            <RemoveDiscountButton productId={product.id} />
-                                        ) : (
-
-                                            <Button
-                                                size='sm'
-                                                variant='outline-success'
-                                                onClick={() => {
-                                                    setSelectedProduct(product);
-                                                    setShowCouponModal(true);
-                                                }}
-                                            >
-                                                <Tag size={14} />
-                                            </Button>
-                                        )}
-
-                                        <RemoveProductButton productId={product.id} />
-                                    </ButtonGroup>
-                                </div>
-                            </Card.Body>
-                        </Card>
-                    );
-                })}
+                <Row xs={1} sm={1} md={1} lg={4} className='g-3'>
+                    {paginatedProducts.map(product => (
+                        <Col>
+                            <ProductCard product={product} />
+                        </Col>
+                    ))}
+                </Row>
             </div>
         </>
     );

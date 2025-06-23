@@ -1,23 +1,21 @@
+import { Github, Javascript, Linkedin, Typescript } from 'react-bootstrap-icons';
+import { BiLogoPostgresql } from 'react-icons/bi';
 import { FaBootstrap, FaCss3, FaGitAlt, FaHtml5, FaJava, FaNodeJs, FaReact, FaSass } from 'react-icons/fa';
 import { RiNextjsFill } from 'react-icons/ri';
 import { SiMysql, SiPython, SiSpringboot } from 'react-icons/si';
 import { TbBrandCSharp } from 'react-icons/tb';
-import { Github, Javascript, Linkedin, Typescript } from 'react-bootstrap-icons';
-import { BiLogoPostgresql } from 'react-icons/bi';
 
-import { useTheme } from '../theme/ThemeContext';
-import DashboardLayout from '../components/layouts/DashboardLayout';
+import { Code, Coffee, Heart, Send } from 'lucide-react';
 import { Badge, Button, Card, Col, Container, Nav, Row } from 'react-bootstrap';
-import { Code, Coffee, Heart } from 'lucide-react';
+import DashboardLayout from '../components/layouts/DashboardLayout';
+import { useTheme } from '../theme/ThemeContext';
 
 export default function About() {
     const { theme } = useTheme();
     const isDark = theme === 'dark';
 
-    const cardClass = isDark ? 'bg-dark text-light border-secondary' : 'bg-light text-dark border-secondary';
+    const cardClass = isDark ? 'bg-dark text-light border-light' : 'bg-light text-dark border-secondary';
     const textMutedClass = isDark ? 'text-light' : 'text-muted';
-
-
 
     const techs = [
         { name: 'HTML5', color: '#E34F26', icon: <FaHtml5 size={32} /> },
@@ -63,7 +61,7 @@ export default function About() {
             <Container className='px-3 px-md-5'>
                 {/* Sobre o Projeto */}
                 <Card className={`${cardClass} mb-4`}>
-                    <Card.Header className={`d-flex align-items-center gap-2 fw-bold ${isDark ? 'bg-secondary' : ''}`}>
+                    <Card.Header className={'d-flex align-items-center gap-2 fw-bold border-bottom'}>
                         <Heart size={20} className="text-danger" />
                         Sobre este Projeto
                     </Card.Header>
@@ -86,7 +84,7 @@ export default function About() {
 
                 {/* Sobre o Desenvolvedor */}
                 <Card className={`${cardClass} mb-4`}>
-                    <Card.Header className={`d-flex align-items-center gap-2 fw-bold ${isDark ? 'bg-secondary' : ''}`}>
+                    <Card.Header className={'d-flex align-items-center gap-2 fw-bold border-bottom'}>
                         <Code size={20} />
                         Sobre o Desenvolvedor
                     </Card.Header>
@@ -146,7 +144,8 @@ export default function About() {
 
                 {/* Contato */}
                 <Card className={`${cardClass} mb-4`}>
-                    <Card.Header className={`d-flex align-items-center gap-2 fw-bold ${isDark ? 'bg-secondary' : ''}`}>
+                    <Card.Header className={'d-flex align-items-center gap-2 fw-bold border-bottom'}>
+                        <Send size={20} />
                         Entre em Contato
                     </Card.Header>
                     <Card.Body>

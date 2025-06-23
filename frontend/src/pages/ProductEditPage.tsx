@@ -2,13 +2,14 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Spinner } from 'react-bootstrap';
-import type { Product } from '../store/productStore';
+import { useProductStore, type Product } from '../store/productStore';
 import type { ProductFormData } from '../schemas/productSchema';
 import { getProducts, updateProduct } from '../services/products';
 import ProductForm from '../components/products/ProductForm';
 import DashboardLayout from '../components/layouts/DashboardLayout';
 
 export default function ProductEditPage() {
+    const fetchProducts = useProductStore((s) => s.fetchProducts);
     const { id } = useParams();
     const navigate = useNavigate();
     const [product, setProduct] = useState<Product | null>(null);
@@ -24,6 +25,7 @@ export default function ProductEditPage() {
         try {
             await updateProduct(Number(id), data);
             toast.success('Produto atualizado com sucesso!');
+            await fetchProducts();
             navigate('/');
         } catch (e) {
             console.log(e);

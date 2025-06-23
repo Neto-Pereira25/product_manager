@@ -38,12 +38,12 @@ export default function ApplyDiscountModal({
 
         try {
             if (discountType === 'percent') {
-                const value = Number(percentValue);
-                if (isNaN(value) || value < 1 || value > 80) {
+                const percent = Number(percentValue);
+                if (isNaN(percent) || percent < 1 || percent > 80) {
                     setError('O valor do desconto percentual deve estar entre 1% e 80%.');
                     return;
                 }
-                await api.post(`/api/v1/products/${product.id}/discount/percent`, { value });
+                await api.post(`/api/v1/products/${product.id}/discount/percent`, { percent: percent });
             } else {
                 if (!couponId) {
                     setError('Selecione um cupom válido.');
@@ -100,6 +100,7 @@ export default function ApplyDiscountModal({
                             <Form.Label>Valor do Desconto (%)</Form.Label>
                             <Form.Control
                                 type="number"
+                                name='percent'
                                 min={1}
                                 max={80}
                                 step={1}
@@ -121,7 +122,7 @@ export default function ApplyDiscountModal({
                                 <option value="">-- Selecione um cupom --</option>
                                 {validCoupons.map((c) => (
                                     <option key={c.id} value={c.id}>
-                                        {c.code} ({c.type === 'percent' ? `-${c.value}%` : `-R$ ${Number(c.value).toFixed(2)}`})
+                                        {c.code} ({c.type === 'percent' ? `-${c.value}%` : `-R$ ${Number(c.value).toFixed(2)}`}) (Válido até {new Date(c.validUntil).toLocaleDateString('pt-BR')})
                                     </option>
                                 ))}
                             </Form.Select>
