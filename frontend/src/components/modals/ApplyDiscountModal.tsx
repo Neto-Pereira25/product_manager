@@ -6,6 +6,7 @@ import { useProductStore } from '../../store/productStore';
 import type { Product } from '../../store/productStore';
 import { useCouponStore } from '../../store/couponStore';
 import { getValidCoupons } from '../../utils/getValidCoupon';
+import { useTheme } from '../../theme/ThemeContext';
 
 type ApplyCouponModalProps = {
     product: Product;
@@ -26,6 +27,8 @@ export default function ApplyDiscountModal({
     const fetchProducts = useProductStore((s) => s.fetchProducts);
     const { coupons, fetchCoupons } = useCouponStore();
     const validCoupons = getValidCoupons(coupons);
+    const { theme } = useTheme();
+    const isDark = theme === 'dark';
 
     useEffect(() => {
         fetchCoupons();
@@ -72,20 +75,25 @@ export default function ApplyDiscountModal({
     };
 
     return (
-        <Modal show={show} onHide={onClose}>
+        <Modal
+            show={show}
+            onHide={onClose}
+            centered
+            contentClassName={isDark ? 'bg-dark text-light' : 'bg-white text-dark'}
+        >
             <Form onSubmit={handleSubmit}>
-                <Modal.Header>
+                <Modal.Header closeButton closeVariant={isDark ? 'white' : undefined}>
                     <Modal.Title>Aplicar Cupom</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     {error && <Alert variant='danger'>{error}</Alert>}
                     <Form.Group className="mb-3">
-                        <Form.Label>Produto</Form.Label>
+                        <Form.Label className={isDark ? 'text-light' : ''}>Produto</Form.Label>
                         <Form.Control type="text" value={product.name} disabled />
                     </Form.Group>
 
                     <Form.Group className="mb-3">
-                        <Form.Label>Tipo de Desconto</Form.Label>
+                        <Form.Label className={isDark ? 'text-light' : ''}>Tipo de Desconto</Form.Label>
                         <Form.Select
                             value={discountType}
                             onChange={(e) => setDiscountType(e.target.value as 'percent' | 'coupon')}
@@ -97,7 +105,7 @@ export default function ApplyDiscountModal({
 
                     {discountType === 'percent' ? (
                         <Form.Group className="mb-3">
-                            <Form.Label>Valor do Desconto (%)</Form.Label>
+                            <Form.Label className={isDark ? 'text-light' : ''}>Valor do Desconto (%)</Form.Label>
                             <Form.Control
                                 type="number"
                                 name='percent'
@@ -113,7 +121,7 @@ export default function ApplyDiscountModal({
                         </Form.Group>
                     ) : (
                         <Form.Group className="mb-3">
-                            <Form.Label>Selecione o Cupom</Form.Label>
+                            <Form.Label className={isDark ? 'text-light' : ''}>Selecione o Cupom</Form.Label>
                             <Form.Select
                                 value={couponId}
                                 onChange={(e) => setCouponId(Number(e.target.value))}

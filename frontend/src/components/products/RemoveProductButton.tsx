@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { Trash } from 'react-bootstrap-icons';
-import RemoveProductModal from './RemoveProductModal';
+import RemoveProductModal from '../modals/RemoveProductModal';
 
 type Props = {
     productId: number;

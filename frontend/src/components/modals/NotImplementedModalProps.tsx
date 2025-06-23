@@ -16,8 +16,13 @@ export default function NotImplementedModal({ show, onClose, modalTitle }: NotIm
     const iconBg = isDark ? 'bg-secondary' : 'bg-light';
 
     return (
-        <Modal centered show={show} onHide={onClose}>
-            <Modal.Header closeButton className={modalBg}>
+        <Modal
+            show={show}
+            onHide={onClose}
+            centered
+            contentClassName={isDark ? 'bg-dark text-light' : 'bg-white text-dark'}
+        >
+            <Modal.Header closeButton closeVariant={isDark ? 'white' : undefined}>
                 <Modal.Title className='d-flex align-items-center gap-3'>
                     <div className={`${iconBg} p-2 rounded`}>
                         <Wrench size={24} className={isDark ? 'text-light' : 'text-dark'} />

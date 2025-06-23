@@ -10,7 +10,7 @@ import { calculateFinalPrice } from '../../utils/calculateFinalPrice';
 import { formatDiscountLabel } from '../../utils/formatDiscountLabel';
 import RemoveDiscountButton from './RemoveDiscountButton';
 import RemoveProductButton from './RemoveProductButton';
-import ApplyDiscountModal from './ApplyDiscountModal';
+import ApplyDiscountModal from '../modals/ApplyDiscountModal';
 
 type ProductCardProps = {
     product: Product;

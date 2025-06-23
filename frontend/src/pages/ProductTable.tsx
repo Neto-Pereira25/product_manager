@@ -2,7 +2,7 @@ import { Edit, Tag } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Badge, Button, ButtonGroup, Col, Row, Spinner, Table } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import ApplyDiscountModal from '../components/products/ApplyDiscountModal';
+import ApplyDiscountModal from '../components/modals/ApplyDiscountModal';
 import ProductCard from '../components/products/ProductCard';
 import RemoveDiscountButton from '../components/products/RemoveDiscountButton';
 import RemoveProductButton from '../components/products/RemoveProductButton';

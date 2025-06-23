@@ -2,6 +2,7 @@ import { toast } from 'react-toastify';
 import { removeDiscount } from '../../services/discount';
 import { useProductStore } from '../../store/productStore';
 import { Button, Modal } from 'react-bootstrap';
+import { useTheme } from '../../theme/ThemeContext';
 
 type Props = {
     productId: number;
@@ -13,6 +14,9 @@ export default function RemoveDiscountModal({
     productId, show, onClose
 }: Props) {
     const fetchProducts = useProductStore((s) => s.fetchProducts);
+
+    const { theme } = useTheme();
+    const isDark = theme === 'dark';
 
     const handleRemove = async () => {
         try {
@@ -28,12 +32,21 @@ export default function RemoveDiscountModal({
     };
 
     return (
-        <Modal show={show} onHide={onClose}>
-            <Modal.Header closeButton>
-                <Modal.Title>Remover Desconto</Modal.Title>
+        <Modal
+            show={show}
+            onHide={onClose}
+            centered
+            contentClassName={isDark ? 'bg-dark text-light' : 'bg-white text-dark'}
+        >
+            <Modal.Header closeButton closeVariant={isDark ? 'white' : undefined}>
+                <Modal.Title className={isDark ? 'text-light' : 'text-dark'}>
+                    Remover Desconto
+                </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                Tem certeza que deseja remover o desconto deste produto?
+                <p className={`fs-5 ${isDark ? 'text-light' : 'text-dark'}`}>
+                    Tem certeza que deseja remover o desconto deste produto?
+                </p>
             </Modal.Body>
             <Modal.Footer>
                 <Button variant='secondary' onClick={onClose}>

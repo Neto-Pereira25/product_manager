@@ -1,7 +1,7 @@
 import { XCircle } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from 'react-bootstrap';
-import RemoveDiscountModal from './RemoveDiscountModal';
+import RemoveDiscountModal from '../modals/RemoveDiscountModal';
 
 type Props = {
     productId: number;
