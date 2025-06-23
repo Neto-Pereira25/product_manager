@@ -1,13 +1,16 @@
 import { useEffect } from 'react';
+import { Card, Col, Container, Row } from 'react-bootstrap';
+import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
+
+import DashboardLayout from '../components/layouts/DashboardLayout';
+
 import { useCouponStore } from '../store/couponStore';
 import { useProductStore } from '../store/productStore';
 import { calculateFinalPrice } from '../utils/calculateFinalPrice';
-import DashboardLayout from '../components/layouts/DashboardLayout';
-import { Card, Col, Container, Row } from 'react-bootstrap';
 
 export default function Dashboard() {
     const { products, fetchProducts } = useProductStore();
-    const { coupons, fetchCoupons } = useCouponStore();
+    const { /*coupons,*/ fetchCoupons } = useCouponStore();
 
     useEffect(() => {
         fetchProducts();
@@ -85,6 +88,37 @@ export default function Dashboard() {
                             <Card.Body>
                                 <h6 className='text-muted'>% com Cupom</h6>
                                 <h4 className='fw-bold'>{percentWithCoupon.toFixed(1)}</h4>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row>
+
+                <Row className='mt-4'>
+                    <Col lg={6}>
+                        <Card>
+                            <Card.Header className='fw-bold'>Distribuição de Descontos</Card.Header>
+                            <Card.Body>
+                                <ResponsiveContainer width='100%' height={280}>
+                                    <PieChart>
+                                        <Pie
+                                            data={[
+                                                { name: 'Com Desconto', value: withDiscount },
+                                                { name: 'Sem Desconto', value: totalProducts - withDiscount },
+                                            ]}
+                                            dataKey='value'
+                                            nameKey='name'
+                                            cx='50%'
+                                            cy='50%'
+                                            outerRadius={80}
+                                            label
+                                        >
+                                            <Cell fill='#00C49F' />
+                                            <Cell fill='#FF8042' />
+                                        </Pie>
+                                        <Tooltip />
+                                        <Legend verticalAlign='bottom' height={36} />
+                                    </PieChart>
+                                </ResponsiveContainer>
                             </Card.Body>
                         </Card>
                     </Col>

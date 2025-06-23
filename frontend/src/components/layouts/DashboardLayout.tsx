@@ -88,6 +88,9 @@ export default function DashboardLayout({ children, title }: DashboardLayoutProp
                 </div>
                 <Nav className='flex-column px-3 pt-3'>
                     <NavItem to='/' icon={<ShoppingCart size={18} />} variant={theme} onClick={closeMobileMenu}>
+                        Dashboard
+                    </NavItem>
+                    <NavItem to='/products' icon={<ShoppingCart size={18} />} variant={theme} onClick={closeMobileMenu}>
                         Lista de Produtos
                     </NavItem>
                     <NavItem to='/administration' icon={<Settings size={18} />} variant={theme} onClick={closeMobileMenu}>
@@ -113,6 +116,9 @@ export default function DashboardLayout({ children, title }: DashboardLayoutProp
                     </Link>
                     <Nav className='flex-column'>
                         <NavItem to='/' icon={<ShoppingCart size={18} />} variant={theme} onClick={closeMobileMenu}>
+                            Dashboard
+                        </NavItem>
+                        <NavItem to='/products' icon={<ShoppingCart size={18} />} variant={theme} onClick={closeMobileMenu}>
                             Lista de Produtos
                         </NavItem>
                         <NavItem to='/administration' icon={<Settings size={18} />} variant={theme} onClick={closeMobileMenu}>
