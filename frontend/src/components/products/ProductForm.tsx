@@ -39,7 +39,7 @@ export default function ProductForm({
 
     return (
         <Card className={`${cardClass} mb-4`}>
-            <Card.Header className={`d-flex align-items-center gap-2 fw-bold ${isDark ? 'bg-secondary' : ''}`}>
+            <Card.Header className={'d-flex align-items-center gap-2 fw-bold border-bottom'}>
                 <Card.Title className='d-flex align-items-center gap-2'>
                     {submitText === 'Salvar' ? (
                         <>
