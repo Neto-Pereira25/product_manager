@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Col, Container, Nav, Navbar, Row } from 'react-bootstrap';
-import { HelpCircle, Info, Menu, ShoppingCart, X } from 'lucide-react';
+import { HelpCircle, Info, Menu, Settings, ShoppingCart, X } from 'lucide-react';
 
 import { useTheme } from '../../theme/ThemeContext';
 import Logo from '../Logo';
@@ -24,7 +24,14 @@ const NavItem: React.FC<NavItemProps> = ({ to, icon, children, variant, onClick 
     const bgClass = variant === 'dark' ? 'outline-light' : 'outline-dark';
     return (
         <Nav.Item className='mb-2'>
-            <Button as={Link} to={to} variant={bgClass} onClick={onClick} className='w-100 text-start'>
+            <Button
+                as={Link}
+                to={to}
+                variant={bgClass}
+                onClick={onClick}
+                className='w-100 text-start'
+                style={{ wordBreak: 'break-word' }}
+            >
                 {icon}
                 <span className='ms-2'>{children}</span>
             </Button>
@@ -83,6 +90,9 @@ export default function DashboardLayout({ children, title }: DashboardLayoutProp
                     <NavItem to='/' icon={<ShoppingCart size={18} />} variant={theme} onClick={closeMobileMenu}>
                         Lista de Produtos
                     </NavItem>
+                    <NavItem to='/administration' icon={<Settings size={18} />} variant={theme} onClick={closeMobileMenu}>
+                        Administração
+                    </NavItem>
                     <div className='border-top mt-3 pt-3'>
                         <NavItem to='/how-to-use' icon={<HelpCircle size={18} />} variant={theme} onClick={closeMobileMenu}>
                             Como Usar
@@ -104,6 +114,9 @@ export default function DashboardLayout({ children, title }: DashboardLayoutProp
                     <Nav className='flex-column'>
                         <NavItem to='/' icon={<ShoppingCart size={18} />} variant={theme} onClick={closeMobileMenu}>
                             Lista de Produtos
+                        </NavItem>
+                        <NavItem to='/administration' icon={<Settings size={18} />} variant={theme} onClick={closeMobileMenu}>
+                            Administração
                         </NavItem>
                         <div className='border-top mt-3 pt-3'>
                             <NavItem to='/how-to-use' icon={<HelpCircle size={18} />} variant={theme} onClick={closeMobileMenu}>
