@@ -1,54 +1,129 @@
-# React + TypeScript + Vite
+# 🛒 Product Manager
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Sistema completo para **gestão de produtos** e **aplicação de descontos promocionais** por valor percentual ou cupons. O sistema também apresenta **dashboards analíticos** e **relatórios gerenciais**, permitindo uma visão clara e eficiente dos dados.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Funcionalidades
 
-## Expanding the ESLint configuration
+### 🧾 Catálogo de Produtos
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Cadastro, edição e exclusão de produtos
+- Filtros por nome, faixa de preço e presença de desconto
+- Paginação de resultados
+- Aplicação de descontos:
+  - ✅ Percentual
+  - ✅ Cupons (válidos, com data e limite de uso)
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### 💸 Descontos e Cupons
+
+- Sistema robusto para cupons e descontos ativos
+- Aplicação de cupons diretamente nos produtos
+- Verificação de validade, limite de uso e valor de desconto
+
+### 📊 Dashboard Executivo
+
+Painel com KPIs de alto nível:
+
+- Total de produtos ativos
+- Produtos esgotados
+- Produtos com descontos ativos
+- Valor médio dos produtos e dos descontos
+- Percentual de produtos com cupons
+- Gráficos (linha e pizza)
+
+### 📑 Relatórios Avançados
+
+1. **Distribuição de Estoque por Faixa de Preço**
+2. **Impacto Financeiro dos Descontos**
+3. **Produtos com Maior Estoque e Desconto Ativo**
+4. **Top Produtos com Maior Redução em Valor Absoluto**
+5. **Efetividade dos Cupons (uso por código)**
+6. **Comparativo: Preço Original vs Final**
+7. **Produtos com Cupons Prestes a Expirar**
+
+---
+
+## 💻 Tecnologias Utilizadas
+
+- **React** (com TypeScript)
+- **Zustand** – Gerenciamento de estado global
+- **React Router DOM** – Roteamento de páginas
+- **React Bootstrap** – UI responsiva e acessível
+- **React Toastify** – Feedback para ações do usuário
+- **Recharts** – Gráficos interativos
+- **Axios** – Comunicação com API
+- **Theme Context** – Alternância entre tema claro e escuro
+
+---
+
+## 🎨 Design Responsivo
+
+Interface adaptada para **dispositivos móveis**, **tablets** e **desktop**, com alternância de tema claro/escuro ajustável no menu.
+
+---
+
+## 📷 Capturas de Tela
+
+(💡 Dica: adicione aqui screenshots das páginas principais, como o Dashboard, Lista de Produtos e Relatórios.)
+
+---
+
+## 📁 Organização do Projeto
+
+```bash
+src/
+├── components/
+│ ├── layouts/
+│ ├── modals/
+│ ├── products/
+│ ├── reports/
+│ ├── Logo.tsx
+│ ├── ThemeToggle.tsx
+├── pages/
+│ ├── DashboardPage.tsx
+│ ├── ProductCatalog.tsx
+│ ├── ReportsPage.tsx
+├── routes/
+├── schemas/
+├── services/
+├── store/
+├── theme/
+├── utils/
+├── App.tsx/
+├── index.css/
+├── index.tsx/
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## ⚙️ Como Executar
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+1. Clone o repositório:
+
+```bash
+git clone git@github.com:Neto-Pereira25/product_manager.git
+
+cd product_manager/frontend
 ```
+
+2. Instale as dependências:
+
+```bash
+npm install
+```
+
+3. Inicie o projeto:
+
+```bash
+npm run dev
+```
+
+---
+
+## 👨‍💻 Autor
+
+Desenvolvido por José Pereira da Silva Neto
+
+- 📧 devneto203@gmail.com
+- 🔗 [LinkedIn](https://www.linkedin.com/in/jose-neto-programador/)
