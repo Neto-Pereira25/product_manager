@@ -66,15 +66,17 @@ export default function About() {
                         Sobre este Projeto
                     </Card.Header>
                     <Card.Body>
-                        <p className={`${textMutedClass} mb-0`}>
-                            O <strong>Cupom<span className="text-primary">.stock</span></strong> é um projeto desenvolvido com muito carinho
-                            como parte do processo seletivo para vaga de Desenvolvedor I no SENAI.
-                            ############ COLOCAR TEXTO SOBRE O PROJETO ##############################
+                        <p className={`${textMutedClass} text-justify mb-0`}>
+                            O <strong>Product Manager</strong> é uma aplicação web desenvolvida como parte do processo seletivo para a vaga de Desenvolvedor Júnior no SENAI.
+                            O objetivo principal do projeto é permitir o gerenciamento de produtos e descontos em uma plataforma amigável e eficiente, proporcionando uma visão geral através de dashboards,
+                            relatórios detalhados e operações práticas como cadastro, edição, exclusão e aplicação de descontos em produtos.
                         </p>
                         <div className="d-flex flex-wrap gap-2 mt-3">
                             {[
                                 'React', 'TypeScript', 'Vite', 'Zustand',
-                                'React Router', 'Bootstrap'
+                                'React Router Dom', 'React Bootstrap',
+                                'React Toastify', 'Recharts',
+                                'Axios'
                             ].map(tech => (
                                 <Badge key={tech} bg="secondary">{tech}</Badge>
                             ))}
