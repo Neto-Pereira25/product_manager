@@ -8,6 +8,7 @@ import { useProductStore } from '../store/productStore';
 import { useTheme } from '../theme/ThemeContext';
 import { getStockByPriceRange } from '../utils/getStockByPriceRange';
 import HighStockDiscountedProductsReport from '../components/reports/HighStockDiscountedProductsReport';
+import TopPriceReductionsReport from '../components/reports/TopPriceReductionsReport';
 
 export default function Reports() {
     const { theme } = useTheme();
@@ -57,7 +58,7 @@ export default function Reports() {
                                             }}
                                         />
                                         <Tooltip contentStyle={{ backgroundColor: isDark ? '#333' : '#fff' }} />
-                                        <Bar dataKey='stock' fill={isDark ? '0d6efd' : '007bff'}>
+                                        <Bar dataKey='stock' fill={isDark ? '#fff' : '#333'}>
                                             {stockByRange.map((_, index) => (
                                                 <Cell key={index} fill={index % 2 === 0 ? '#0d6efd' : '#20c997'} />
                                             ))}
@@ -102,6 +103,10 @@ export default function Reports() {
 
                 <Row className='mb-4'>
                     <HighStockDiscountedProductsReport />
+                </Row>
+
+                <Row className='mt-4'>
+                    <TopPriceReductionsReport />
                 </Row>
             </Container>
         </DashboardLayout>
