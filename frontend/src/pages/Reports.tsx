@@ -11,6 +11,7 @@ import HighStockDiscountedProductsReport from '../components/reports/HighStockDi
 import TopPriceReductionsReport from '../components/reports/TopPriceReductionsReport';
 import CouponEffectivenessReport from '../components/reports/CouponEffectivenessReport';
 import PriceComparativeReport from '../components/reports/PriceComparativeReport';
+import ExpiringCouponsReport from '../components/reports/ExpiringCouponsReport';
 
 export default function Reports() {
     const { theme } = useTheme();
@@ -117,6 +118,10 @@ export default function Reports() {
 
                 <Row className='mt-4'>
                     <PriceComparativeReport />
+                </Row>
+
+                <Row className='mt-4'>
+                    <ExpiringCouponsReport />
                 </Row>
             </Container>
         </DashboardLayout>
