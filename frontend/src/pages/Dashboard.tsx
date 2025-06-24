@@ -160,7 +160,15 @@ export default function Dashboard() {
                                         }}
                                         />
                                         <Legend />
-                                        <Line type='monotone' dataKey='count' stroke={isDark ? '#2dd4bf' : '#4e79a7'} />
+                                        <Line
+                                            type='monotone'
+                                            dataKey='count'
+                                            stroke={isDark ? '#2dd4bf' : '#4e79a7'}
+                                            strokeWidth={2}
+                                            dot={{ r: 4 }}
+                                            activeDot={{ r: 6 }}
+                                            name='Produtos x Data'
+                                        />
                                     </LineChart>
                                 </ResponsiveContainer>
                             </Card.Body>
