@@ -9,6 +9,7 @@ import { useTheme } from '../theme/ThemeContext';
 import { getStockByPriceRange } from '../utils/getStockByPriceRange';
 import HighStockDiscountedProductsReport from '../components/reports/HighStockDiscountedProductsReport';
 import TopPriceReductionsReport from '../components/reports/TopPriceReductionsReport';
+import CouponEffectivenessReport from '../components/reports/CouponEffectivenessReport';
 
 export default function Reports() {
     const { theme } = useTheme();
@@ -107,6 +108,10 @@ export default function Reports() {
 
                 <Row className='mt-4'>
                     <TopPriceReductionsReport />
+                </Row>
+
+                <Row className='mt-4'>
+                    <CouponEffectivenessReport />
                 </Row>
             </Container>
         </DashboardLayout>
