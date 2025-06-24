@@ -26,8 +26,8 @@ export default function DiscountImpactReport() {
         <Col md={12}>
             <Card className={`mb-4 shadow-sm ${isDark ? 'bg-dark text-light' : ''}`}>
                 <Card.Header className='d-flex align-items-center gap-3 fw-bold border-bottom'>
-                    <TrendingDown />
-                    <TrendingUp />
+                    <TrendingDown size={20} />
+                    <TrendingUp size={20} />
                     Impacto Financeiro dos Descontos
                 </Card.Header>
                 <Card.Body>

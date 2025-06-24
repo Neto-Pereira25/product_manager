@@ -3,6 +3,7 @@ import { useProductStore } from '../../store/productStore';
 import { useTheme } from '../../theme/ThemeContext';
 import { getHighStockDiscountedProducts } from '../../utils/getHighStockDiscountedProducts';
 import { Card, Col, Table } from 'react-bootstrap';
+import { Package } from 'lucide-react';
 
 export default function HighStockDiscountedProductsReport() {
     const { products, fetchProducts } = useProductStore();
@@ -18,7 +19,8 @@ export default function HighStockDiscountedProductsReport() {
     return (
         <Col md={12}>
             <Card className={`mb-4 shadow-sm ${isDark ? 'bg-dark text-light' : ''}`}>
-                <Card.Header className='fw-bold border-bottom'>
+                <Card.Header className='d-flex align-items-center gap-2 fw-bold border-bottom'>
+                    <Package size={18} />
                     Produtos com Maior Estoque com Desconto Ativo
                 </Card.Header>
                 <Card.Body>

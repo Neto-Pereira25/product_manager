@@ -34,7 +34,7 @@ export default function Reports() {
                     <Col md={12}>
                         <Card className={`${cardBg} shadow-sm`}>
                             <Card.Header className={`${textColor} d-flex align-items-center gap-3 fw-bold border-bottom`}>
-                                <BarChartBig />
+                                <BarChartBig size={20} />
                                 Distribuição de Estoque por Faixa de Preço
                             </Card.Header>
                             <Card.Body className={`${textColor}`}>

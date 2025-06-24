@@ -4,6 +4,7 @@ import { useCouponStore } from '../../store/couponStore';
 import { useTheme } from '../../theme/ThemeContext';
 import { getExpiringCoupons } from '../../utils/getExpiringCoupons';
 import { Card, Col, Table } from 'react-bootstrap';
+import { Hourglass } from 'lucide-react';
 
 export default function ExpiringCouponsReport() {
     const { products, fetchProducts } = useProductStore();
@@ -21,7 +22,8 @@ export default function ExpiringCouponsReport() {
     return (
         <Col md={12}>
             <Card className={`mb-4 shadow-sm ${isDark ? 'bg-dark text-light' : ''}`}>
-                <Card.Header className='d-flex gap-2 fw-bold border-bottom'>
+                <Card.Header className='d-flex align-items-center gap-2 fw-bold border-bottom'>
+                    <Hourglass size={20} />
                     Cupons Prestes a Expirar
                 </Card.Header>
                 <Card.Body>

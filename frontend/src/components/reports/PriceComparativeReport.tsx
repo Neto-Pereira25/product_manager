@@ -3,6 +3,7 @@ import { useProductStore } from '../../store/productStore';
 import { useTheme } from '../../theme/ThemeContext';
 import { getPriceComparative } from '../../utils/getPriceComparative';
 import { Card, Col, Table } from 'react-bootstrap';
+import { TrendingDown } from 'lucide-react';
 
 export default function PriceComparativeReport() {
     const { products, fetchProducts } = useProductStore();
@@ -18,8 +19,8 @@ export default function PriceComparativeReport() {
     return (
         <Col md={12}>
             <Card className={`mb-4 shadow-sm ${isDark ? 'bg-dark text-light' : ''}`}>
-                <Card.Header className='d-flex gap-2 fw-bold border-bottom'>
-
+                <Card.Header className='d-flex align-items-center gap-2 fw-bold border-bottom'>
+                    <TrendingDown size={20} />
                     Comparativo de Preço Médio
                 </Card.Header>
                 <Card.Body>

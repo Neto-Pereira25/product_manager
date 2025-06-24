@@ -22,8 +22,8 @@ export default function CouponEffectivenessReport() {
     return (
         <Col md={12}>
             <Card className={`mb-4 shadow-sm ${isDark ? 'bg-dark text-light' : ''}`}>
-                <Card.Header className='d-flex gap-2 fw-bold border-bottom'>
-                    <Tag />
+                <Card.Header className='d-flex align-items-center gap-2 fw-bold border-bottom'>
+                    <Tag size={20} />
                     Efetividade dos Cupon
                 </Card.Header>
                 <Card.Body>

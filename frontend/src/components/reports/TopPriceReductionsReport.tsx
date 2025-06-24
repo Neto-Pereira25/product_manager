@@ -1,8 +1,9 @@
+import { ArrowDown } from 'lucide-react';
 import { useEffect } from 'react';
+import { Card, Col, Table } from 'react-bootstrap';
 import { useProductStore } from '../../store/productStore';
 import { useTheme } from '../../theme/ThemeContext';
 import { getTopPriceReductions } from '../../utils/getTopPriceReductions';
-import { Card, Col, Table } from 'react-bootstrap';
 
 export default function TopPriceReductionsReport() {
     const { products, fetchProducts } = useProductStore();
@@ -18,7 +19,8 @@ export default function TopPriceReductionsReport() {
     return (
         <Col md={12}>
             <Card className={`mb-4 shadow-sm ${isDark ? 'bg-dark text-light' : ''}`}>
-                <Card.Header className='d-flex gap-2 fw-bold border-bottom'>
+                <Card.Header className='d-flex align-items-center gap-2 fw-bold border-bottom'>
+                    <ArrowDown size={18} />
                     Top 5 Produtos com Maior Redução em Valor Absoluto
                 </Card.Header>
                 <Card.Body>
