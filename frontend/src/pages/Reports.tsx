@@ -7,6 +7,7 @@ import DiscountImpactReport from '../components/reports/DiscountImpactReport';
 import { useProductStore } from '../store/productStore';
 import { useTheme } from '../theme/ThemeContext';
 import { getStockByPriceRange } from '../utils/getStockByPriceRange';
+import HighStockDiscountedProductsReport from '../components/reports/HighStockDiscountedProductsReport';
 
 export default function Reports() {
     const { theme } = useTheme();
@@ -95,8 +96,12 @@ export default function Reports() {
                     </Col>
                 </Row>
 
-                <Row className='mt-4'>
+                <Row className='mb-4'>
                     <DiscountImpactReport />
+                </Row>
+
+                <Row className='mb-4'>
+                    <HighStockDiscountedProductsReport />
                 </Row>
             </Container>
         </DashboardLayout>
