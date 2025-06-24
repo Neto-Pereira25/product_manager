@@ -50,7 +50,7 @@ export default function CouponEffectivenessReport() {
                                             <td>{item.code}</td>
                                             <td>{item.type === 'percent' ? 'Percentual' : 'Fixo'}</td>
                                             <td>{item.uses}</td>
-                                            <td>{item.totalDiscount}</td>
+                                            <td>R$ {item.totalDiscount.toFixed(2)}</td>
                                         </tr>
                                     ))
                                 ) : (
