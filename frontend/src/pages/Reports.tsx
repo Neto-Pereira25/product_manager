@@ -1,10 +1,12 @@
+import { BarChartBig } from 'lucide-react';
 import { useEffect } from 'react';
+import { Card, Col, Container, Row, Table } from 'react-bootstrap';
+import { Bar, BarChart, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import DashboardLayout from '../components/layouts/DashboardLayout';
+import DiscountImpactReport from '../components/reports/DiscountImpactReport';
 import { useProductStore } from '../store/productStore';
 import { useTheme } from '../theme/ThemeContext';
 import { getStockByPriceRange } from '../utils/getStockByPriceRange';
-import DashboardLayout from '../components/layouts/DashboardLayout';
-import { Card, Col, Container, Row, Table } from 'react-bootstrap';
-import { Bar, BarChart, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 
 export default function Reports() {
     const { theme } = useTheme();
@@ -26,14 +28,33 @@ export default function Reports() {
                 <Row className='mb-4'>
                     <Col md={12}>
                         <Card className={`${cardBg} shadow-sm`}>
-                            <Card.Header className={`${textColor} fw-bold`}>
+                            <Card.Header className={`${textColor} d-flex align-items-center gap-3 fw-bold border-bottom`}>
+                                <BarChartBig />
                                 Distribuição de Estoque por Faixa de Preço
                             </Card.Header>
                             <Card.Body className={`${textColor}`}>
-                                <ResponsiveContainer width='100%' height={300}>
+                                <ResponsiveContainer width='100%' height={350}>
                                     <BarChart data={stockByRange}>
-                                        <XAxis dataKey='range' stroke={isDark ? '#ccc' : '#333'} />
-                                        <YAxis stroke={isDark ? '#ccc' : '#333'} />
+                                        <XAxis
+                                            dataKey='range'
+                                            stroke={isDark ? '#ccc' : '#333'}
+                                            label={{
+                                                value: 'Intevalo de Preços (R$)',
+                                                position: 'insideBottom',
+                                                offset: -5,
+                                                fill: isDark ? '#ccc' : '#333',
+                                            }}
+                                        />
+                                        <YAxis
+                                            stroke={isDark ? '#ccc' : '#333'}
+                                            label={{
+                                                value: 'Quantidade de Produtos',
+                                                angle: -90,
+                                                position: 'insideLeft',
+                                                dy: 50,
+                                                fill: isDark ? '#ccc' : '#333',
+                                            }}
+                                        />
                                         <Tooltip contentStyle={{ backgroundColor: isDark ? '#333' : '#fff' }} />
                                         <Bar dataKey='stock' fill={isDark ? '0d6efd' : '007bff'}>
                                             {stockByRange.map((_, index) => (
@@ -43,9 +64,17 @@ export default function Reports() {
                                     </BarChart>
                                 </ResponsiveContainer>
 
-                                <Table striped bordered hover size='sm' responsive className='mt-4'>
-                                    <thead className='table-light'>
-                                        <tr>
+                                <Table
+                                    striped
+                                    bordered
+                                    hover
+                                    responsive
+                                    variant={isDark ? 'dark' : 'light'}
+                                    className={`${isDark ? 'table-dark' : 'table-light'} mt-5`}
+
+                                >
+                                    <thead>
+                                        <tr className='text-center'>
                                             <th>Faixa de Preços</th>
                                             <th>Quantidade de Produtos</th>
                                             <th>Estoque Total na Faixa</th>
@@ -64,6 +93,10 @@ export default function Reports() {
                             </Card.Body>
                         </Card>
                     </Col>
+                </Row>
+
+                <Row className='mt-4'>
+                    <DiscountImpactReport />
                 </Row>
             </Container>
         </DashboardLayout>
