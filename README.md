@@ -108,7 +108,7 @@ npm install
 ```
 
 2. Configure as variáveis de ambiente no arquivo **.env**
-   2.1. Mude a porta para ser a mesma que você configurou no backend
+   * Mude a porta para ser a mesma que você configurou no backend
 
 ```bash
 VITE_API_BASE_URL=http://localhost:3333/api/v1
