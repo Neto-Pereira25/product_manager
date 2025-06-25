@@ -86,7 +86,7 @@ Interface adaptada para **dispositivos móveis**, **tablets** e **desktop**, com
 </p>
 
 <p align="center">
-  <img src="./assets/images/help_light_mode.png" alt="Como Usar - Light Mode" width="45%" />
+  <img src="./assets/images/help_ligh_mode.png" alt="Como Usar - Light Mode" width="45%" />
   <img src="./assets/images/help_dark_mode.png" alt="Como Usar - Dark Mode" width="45%" />
 </p>
 
