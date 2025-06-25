@@ -65,7 +65,35 @@ Interface adaptada para **dispositivos móveis**, **tablets** e **desktop**, com
 
 ## 📷 Capturas de Tela
 
-(💡 Dica: adicione aqui screenshots das páginas principais, como o Dashboard, Lista de Produtos e Relatórios.)
+<p align="center">
+  <img src="./assets/images/dashboard_light_mode.png" alt="Dashboard da Aplicação - Light Mode" width="45%" />
+  <img src="./assets/images/dashboard_dark_mode.png" alt="Dashboard da Aplicação - Dark Mode" width="45%" />
+</p>
+
+<p align="center">
+  <img src="./assets/images/lista_de_produtos_light_mode.png" alt="Lista de Produtos - Light Mode" width="45%" />
+  <img src="./assets/images/lista_de_produtos_dark_mode.png" alt="Lista de Produtos - Dark Mode" width="45%" />
+</p>
+
+<p align="center">
+  <img src="./assets/images/relatorios_light_mode.png" alt="Relatórios - Light Mode" width="45%" />
+  <img src="./assets/images/relatorios_dark_mode.png" alt="Relatórios - Dark Mode" width="45%" />
+</p>
+
+<p align="center">
+  <img src="./assets/images/admin_light_mode.png" alt="Administração - Light Mode" width="45%" />
+  <img src="./assets/images/admin_dark_mode.png" alt="Administração - Dark Mode" width="45%" />
+</p>
+
+<p align="center">
+  <img src="./assets/images/help_light_mode.png" alt="Como Usar - Light Mode" width="45%" />
+  <img src="./assets/images/help_dark_mode.png" alt="Como Usar - Dark Mode" width="45%" />
+</p>
+
+<p align="center">
+  <img src="./assets/images/sobre_light_mode.png" alt="Sobre a aplicação e o Desenvolvedor - Light Mode" width="45%" />
+  <img src="./assets/images/sobre_dark_mode.png" alt="Sobre a aplicação e o Desenvolvedor - Dark Mode" width="45%" />
+</p>
 
 ---
 
