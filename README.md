@@ -63,6 +63,15 @@ A solução desenvolvida permite:
 - Node.js e npm (ou yarn)
 - PostgreSQL
 
+### Criação do banco de dados (modo desenvolvimento):
+#### 1. Crie um banco postgres e tenha em mãos as seguintes informações:
+- usuário do banco
+- senha do banco
+- host do banco
+- nome do banco
+
+#### 2. Com o banco criado você vai poder configurar a variável de ambiente para executar o projeto na próxima etapa.
+
 ### 🧪 Rodar manualmente (modo desenvolvimento)
 
 #### 1. Clonar o repositório
@@ -74,7 +83,7 @@ cd product_manager
 
 #### 2. Configurar variáveis de ambiente
 
-Copie o `.env.example` para `.env` no frontend e backend.
+Copie o `.env.example` para `.env` no frontend e backend e faça as modificações.
 
 #### 3. Backend
 
@@ -92,11 +101,40 @@ npx prisma migrate dev
 npm run dev
 ```
 
-2. Em outro terminal rode o comando
+2. Vai ser necessário cadastrar alguns cupons para podermos aplicar nos produtos:
+
+- Analise a query abaixo e faça as modificações necessárias para os cupons que você deseja adicionar, removendo ou acrescentando cupons, modificando seus valores e/ou sua data de validade.
+
+- Uma vez que você fez as modificações execute a query para inserir esses dados no banco.
+
+```bash
+-- Inserção de cupons promocionais
+INSERT into "Coupon" 
+	(code, "type", value, "oneShot", "maxUses", "validFrom", "validUntil")
+VALUES
+('promo10', 'percent', 10, false, 100, NOW(), NOW() + INTERVAL '1 year'),
+('promo25', 'percent', 25, false, NULL, NOW(), NOW() + INTERVAL '2 years'),
+('save50', 'fixed', 50.00, false, 500, NOW(), NOW() + INTERVAL '3 years'),
+('onlyonce15', 'percent', 15, true, 1, NOW(), NOW() + INTERVAL '1 year'),
+('cashback20', 'fixed', 20.00, false, NULL, NOW(), NOW() + INTERVAL '2 years'),
+('promo5', 'percent', 5, false, NULL, NOW(), NOW() + INTERVAL '1 year'),
+('desconto30', 'percent', 30, false, NULL, NOW(), NOW() + INTERVAL '1 year'),
+('quero10', 'fixed', 10.00, true, 5, NOW(), NOW() + INTERVAL '6 months'),
+('unico50', 'fixed', 50.00, true, 1, NOW(), NOW() + INTERVAL '1 year'),
+('oferta40', 'percent', 40, false, NULL, NOW(), NOW() + INTERVAL '2 years'),
+('fretegratis', 'fixed', 25.00, false, NULL, NOW(), NOW() + INTERVAL '1 year'),
+('cupom15', 'percent', 15, false, NULL, NOW(), NOW() + INTERVAL '2 years'),
+('desconto7', 'percent', 7, true, 1, NOW(), NOW() + INTERVAL '1 year'),
+('quero25', 'percent', 25, false, NULL, NOW(), NOW() + INTERVAL '2 years'),
+('extra80', 'percent', 80, false, NULL, NOW(), NOW() + INTERVAL '1 year');
+```
+
+3. Em outro terminal rode o comando
 
 ```bash
 npm run test
 ```
+
 
 #### 4. Frontend
 
