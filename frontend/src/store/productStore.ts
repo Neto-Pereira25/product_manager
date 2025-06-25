@@ -67,7 +67,7 @@ export const useProductStore = create<ProductStore>()(
                 hasDiscount: undefined
             },
             page: 1,
-            itemsPerPage: 5,
+            itemsPerPage: 10,
             totalPages: 1,
             loading: false,
 
