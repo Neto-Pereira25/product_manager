@@ -4,6 +4,7 @@ import { createProduct } from '../services/products';
 import ProductForm from '../components/products/ProductForm';
 import type { ProductFormData } from '../schemas/productSchema';
 import DashboardLayout from '../components/layouts/DashboardLayout';
+import { AxiosError } from 'axios';
 
 export default function ProductCreatePage() {
     const navigate = useNavigate();
@@ -13,9 +14,13 @@ export default function ProductCreatePage() {
             await createProduct(data);
             toast.success('Produto criado com sucesso!');
             navigate('/');
-        } catch (e) {
-            console.log(e);
-            toast.error('Erro ao criar produto!');
+        } catch (e: any) {
+            if (e instanceof AxiosError) {
+                toast.error(e.response?.data.message);
+            } else {
+                console.log(e);
+                toast.error('Erro ao criar produto!');
+            }
         }
     };
 
