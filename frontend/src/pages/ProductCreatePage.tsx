@@ -5,15 +5,18 @@ import ProductForm from '../components/products/ProductForm';
 import type { ProductFormData } from '../schemas/productSchema';
 import DashboardLayout from '../components/layouts/DashboardLayout';
 import { AxiosError } from 'axios';
+import { useProductStore } from '../store/productStore';
 
 export default function ProductCreatePage() {
+    const fetchProducts = useProductStore((s) => s.fetchProducts);
     const navigate = useNavigate();
 
     const handleCreate = async (data: ProductFormData) => {
         try {
             await createProduct(data);
+            await fetchProducts();
             toast.success('Produto criado com sucesso!');
-            navigate('/');
+            navigate('/products');
         } catch (e: any) {
             if (e instanceof AxiosError) {
                 toast.error(e.response?.data.message);

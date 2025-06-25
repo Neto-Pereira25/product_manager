@@ -9,6 +9,12 @@
     "strict": true,
     "skipLibCheck": true
   },
-  "include": ["src", "app.ts", "server.ts", "server.ts"],
-  "typeRoots": ["./src/types"]
+  "include": [
+    "src",
+    "app.ts",
+    "server.ts"
+  ],
+  "typeRoots": [
+    "./src/types"
+  ]
 }

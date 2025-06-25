@@ -8,8 +8,8 @@ export function filterProducts(products: Product[], filters: Filters): Product[]
 
         const price = product.price;
         const priceMatch =
-            (filters.minPrice === undefined || price >= filters.minPrice) &&
-            (filters.maxPrice === undefined || price <= filters.maxPrice);
+            (filters.minPrice === undefined || Number(price) >= filters.minPrice) &&
+            (filters.maxPrice === undefined || Number(price) <= filters.maxPrice);
 
         const hasDiscount = !!product.productDiscount;
         const discountMatch = filters.hasDiscount === undefined || filters.hasDiscount === hasDiscount;

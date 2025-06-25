@@ -15,7 +15,7 @@ const NotFound = () => {
             </Row>
             <Row className="text-center">
                 <Col>
-                    <Button as={Link} to="/" variant="primary" size="lg" className="d-flex align-items-center">
+                    <Button as={Link as any} to="/" variant="primary" size="lg" className="d-flex align-items-center">
                         <Home className="me-2" />
                         Voltar para a página inicial
                     </Button>

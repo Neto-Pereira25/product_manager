@@ -25,7 +25,7 @@ const NavItem: React.FC<NavItemProps> = ({ to, icon, children, variant, onClick 
     return (
         <Nav.Item className='mb-2'>
             <Button
-                as={Link}
+                as={Link as any}
                 to={to}
                 variant={bgClass}
                 onClick={onClick}

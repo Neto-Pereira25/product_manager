@@ -27,7 +27,7 @@ export default function ProductEditPage() {
             await updateProduct(Number(id), data);
             toast.success('Produto atualizado com sucesso!');
             await fetchProducts();
-            navigate('/');
+            navigate('/products');
         } catch (e: any) {
             if (e instanceof AxiosError) {
                 toast.error(e.response?.data.message);
